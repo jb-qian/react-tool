@@ -7,6 +7,9 @@
 /coverage
 
 # production
+/public
+/config
+/scripts
 /build
 
 # misc

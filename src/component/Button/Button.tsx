@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import './button.less';
-
 interface Props{
     disabled?: boolean;
     onClick?: () => void;

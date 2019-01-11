@@ -1,8 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import './alert.less';
-
 import Element from './Element';
 
 interface Props {
