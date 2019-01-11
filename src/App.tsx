@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import '../src/less/border.less';
+import './less/index.less';
 
 import Alert from './component/Alert/Alert';
 import Toast from './component/Toast/Toast';
