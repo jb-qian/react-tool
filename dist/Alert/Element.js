@@ -61,7 +61,7 @@ var Element = /** @class */ (function (_super) {
         return (React.createElement("div", { ref: function (e) { return _this.confirm = e; }, className: "sq-confirm " + this.state.className },
             React.createElement("div", { className: "sq-content" },
                 React.createElement("div", { className: "sq-title" }, this.props.title || '缺少标题'),
-                React.createElement("div", { className: "sq-subtitle" }, '是否退出登录？')),
+                this.props.subtitle && React.createElement("div", { className: "sq-subtitle" }, this.props.subtitle)),
             React.createElement("div", { className: "sq-btns-content brt" },
                 !this.props.noDefault && React.createElement("div", { className: "sq-btn brr", onClick: this["default"] }, "\u53D6\u6D88"),
                 !this.props.noPrimary && React.createElement("div", { className: "sq-btn", onClick: this.primary }, "\u786E\u5B9A"))));

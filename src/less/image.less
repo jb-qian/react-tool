@@ -1,0 +1,25 @@
+.sq-image-box{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    &.width{
+        .sq-image{
+            top: 0;
+            left: 50%;
+            width: auto;
+            height: 100%;
+        }
+    }
+    &.height{
+        .sq-image{
+            left: 0;
+            top: 50%;
+            height: auto;
+            width: 100%;
+        }
+    }
+    .sq-image{
+        position: absolute;
+    }
+}

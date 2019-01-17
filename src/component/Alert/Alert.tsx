@@ -3,9 +3,10 @@ import * as ReactDOM from 'react-dom';
 
 import Element from './Element';
 
-interface Props {
+export interface Props {
     default?: () => void;
     title: string;
+    subtitle?: string;
     noDefault?: boolean;
     noPrimary?: boolean;
     primary?: () => void;

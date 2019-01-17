@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-interface Props {
-    duration: number;
-    text: string;
+import { Props } from './Toast';
+
+interface ToastProps extends Props {
     willUnmount: () => void;
 }
 interface State{
@@ -10,12 +10,12 @@ interface State{
     duration: number;
 }
 
-export default class Element extends React.Component<Props, State> {
+export default class Element extends React.Component<ToastProps, State> {
 
     public refs:any;
     public toast:any;
 
-    constructor (props:Props){
+    constructor (props:ToastProps){
         super(props)
         this.state = {
             duration: this.props.duration || 3000,

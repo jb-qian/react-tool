@@ -1,6 +1,7 @@
-interface Props {
+export interface Props {
     default?: () => void;
     title: string;
+    subtitle?: string;
     noDefault?: boolean;
     noPrimary?: boolean;
     primary?: () => void;

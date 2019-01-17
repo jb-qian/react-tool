@@ -1,11 +1,8 @@
 import * as React from 'react';
 
-interface Props {
-    default?: () => void;
-    title: string;
-    primary?: () => void;
-    noDefault?: boolean;
-    noPrimary?: boolean;
+import { Props } from './Alert';
+
+interface AlertProps extends Props {
     willUnmount: () => void;
 }
 
@@ -14,11 +11,11 @@ interface State {
     className: string;
 }
 
-export default class Element extends React.Component<Props, State>{
+export default class Element extends React.Component<AlertProps, State>{
 
     public confirm:any;
 
-    constructor(props: Props){
+    constructor(props: AlertProps){
         super(props)
         this.state = {
             className: '',
@@ -61,7 +58,9 @@ export default class Element extends React.Component<Props, State>{
             <div ref={ e => this.confirm = e } className={ `sq-confirm ${this.state.className}` }>
                 <div className="sq-content">
                     <div className="sq-title">{ this.props.title || '缺少标题' }</div>
-                    <div className="sq-subtitle">{ '是否退出登录？' }</div>
+                    {
+                        this.props.subtitle && <div className="sq-subtitle">{ this.props.subtitle }</div>
+                    }
                 </div>
                 <div className="sq-btns-content brt">
                 {

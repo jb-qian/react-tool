@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 import Element from './Element';
 
-interface Props {
+export interface Props {
     duration: number;
     text: string;
 }
