@@ -1,7 +1,19 @@
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-10 09:15:22
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-01-18 15:44:21
+ */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import Element from './Element';
+
+/**
+ * @param
+ * duration 时间
+ * text 文字
+ */
 
 export interface Props {
     duration: number;

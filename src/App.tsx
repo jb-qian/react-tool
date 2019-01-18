@@ -1,11 +1,24 @@
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-09 18:03:38
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-01-18 15:43:48
+ */
 import * as React from 'react';
 
 import './less/index.less';
+import { rem } from './component/Tool/Tool';
 
 import Alert from './component/Alert/Alert';
 import Toast from './component/Toast/Toast';
 import Button from './component/Button/Button';
 import Image from './component/Image/Image';
+
+/**
+ * 设计稿750
+ * 100px => 1rem
+ */
+rem(750).set();
 
 class App extends React.Component {
 	public toast = () => {

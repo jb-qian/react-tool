@@ -1,3 +1,9 @@
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-10 10:50:18
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-01-18 15:41:42
+ */
 import * as React from 'react';
 
 import { Props } from './Toast';
@@ -31,6 +37,7 @@ export default class Element extends React.Component<ToastProps, State> {
     }
     public componentDidMount (){
         this.toast.addEventListener('transitionend', this.transitionend);
+        // 时间大于0 自动隐藏
         if (this.state.duration > 0) {
             setTimeout(() => {
                 this.setState({

@@ -1,3 +1,9 @@
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-10 13:44:28
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-01-18 15:40:45
+ */
 import * as React from 'react';
 
 import { Props } from './Alert';
@@ -21,18 +27,23 @@ export default class Element extends React.Component<AlertProps, State>{
             className: '',
         }
     }
+    /**
+     * 取消事件
+     */
     public default = () => {
         this.clone();
-        if (this.props.default) {
-            this.props.default();
-        }
+        this.props.default && this.props.default();
     }
+    /**
+     * 确定事件
+     */
     public primary = () => {
         this.clone();
-        if (this.props.primary) {
-            this.props.primary();
-        }
+        this.props.primary && this.props.primary();
     }
+    /**
+     * 关闭
+     */
     public clone = () => {
         this.confirm.addEventListener('transitionend', this.transitionend);
         this.setState({
@@ -57,17 +68,19 @@ export default class Element extends React.Component<AlertProps, State>{
         return (
             <div ref={ e => this.confirm = e } className={ `sq-confirm ${this.state.className}` }>
                 <div className="sq-content">
-                    <div className="sq-title">{ this.props.title || '缺少标题' }</div>
                     {
-                        this.props.subtitle && <div className="sq-subtitle">{ this.props.subtitle }</div>
+                        this.props.title ? <div className="sq-title">{ this.props.title }</div> : ''
+                    }
+                    {
+                        this.props.subtitle ? <div className="sq-subtitle">{ this.props.subtitle }</div> : ''
                     }
                 </div>
                 <div className="sq-btns-content brt">
                 {
-                    !this.props.noDefault && <div className="sq-btn brr" onClick={ this.default }>取消</div>
+                    !this.props.noDefault ? <div className="sq-btn brr" onClick={ this.default }>取消</div> : ''
                 }
                 {
-                    !this.props.noPrimary && <div className="sq-btn" onClick={ this.primary }>确定</div>
+                    !this.props.noPrimary ? <div className="sq-btn" onClick={ this.primary }>确定</div> : ''
                 }
                 </div>
             </div>

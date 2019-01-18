@@ -13,6 +13,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-10 10:50:18
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-01-18 15:41:42
+ */
 var React = require("react");
 var Element = /** @class */ (function (_super) {
     __extends(Element, _super);
@@ -34,6 +40,7 @@ var Element = /** @class */ (function (_super) {
     Element.prototype.componentDidMount = function () {
         var _this = this;
         this.toast.addEventListener('transitionend', this.transitionend);
+        // 时间大于0 自动隐藏
         if (this.state.duration > 0) {
             setTimeout(function () {
                 _this.setState({

@@ -10,8 +10,17 @@ interface State {
 export default class Element extends React.Component<AlertProps, State> {
     confirm: any;
     constructor(props: AlertProps);
+    /**
+     * 取消事件
+     */
     default: () => void;
+    /**
+     * 确定事件
+     */
     primary: () => void;
+    /**
+     * 关闭
+     */
     clone: () => void;
     /**
      * 动画结束

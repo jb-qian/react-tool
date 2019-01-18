@@ -13,6 +13,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-17 15:03:47
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-01-18 15:44:10
+ */
 var React = require("react");
 var MyImage = /** @class */ (function (_super) {
     __extends(MyImage, _super);
@@ -35,32 +41,32 @@ var MyImage = /** @class */ (function (_super) {
             var offsetWidth = box.offsetWidth, offsetHeight = box.offsetHeight;
             var imgSize = width / height;
             var boxSize = offsetWidth / offsetHeight;
+            // 通过比例算出 需要设置的宽高
+            var style = {};
             if (imgSize > boxSize) {
                 width = -((offsetHeight / height) * width) / 2;
-                _this.setState({
-                    style: {
-                        top: '0',
-                        left: '50%',
-                        width: 'auto',
-                        height: '100%',
-                        marginLeft: width + "px"
-                    },
-                    src: src
-                });
+                style = {
+                    top: '0',
+                    left: '50%',
+                    width: 'auto',
+                    height: '100%',
+                    marginLeft: width + "px"
+                };
             }
             else {
                 height = -((offsetWidth / width) * height) / 2;
-                _this.setState({
-                    style: {
-                        left: '0',
-                        top: '50%',
-                        width: '100%',
-                        height: 'auto',
-                        marginTop: height + "px"
-                    },
-                    src: src
-                });
+                style = {
+                    left: '0',
+                    top: '50%',
+                    width: '100%',
+                    height: 'auto',
+                    marginTop: height + "px"
+                };
             }
+            _this.setState({
+                style: style,
+                src: src
+            });
             _this.props.onSuccess && _this.props.onSuccess();
         };
         image.onerror = function (e) {
@@ -69,7 +75,8 @@ var MyImage = /** @class */ (function (_super) {
     };
     MyImage.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { ref: function (e) { return _this.image = e; }, className: "sq-image-box " + (this.props.className || '') },
+        var className = ['sq-image-box', this.props.className].filter(function (item) { return item; });
+        return (React.createElement("div", { ref: function (e) { return _this.image = e; }, className: className.join(' ') },
             React.createElement("img", { className: "sq-image", style: this.state.style, src: this.state.src, alt: this.props.alt })));
     };
     return MyImage;
