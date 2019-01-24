@@ -13,6 +13,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-10 11:08:12
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-01-18 16:14:25
+ */
 var React = require("react");
 var Button = /** @class */ (function (_super) {
     __extends(Button, _super);
