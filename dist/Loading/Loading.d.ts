@@ -1,4 +1,10 @@
 import * as React from 'react';
-export default class Loading extends React.Component {
+interface Props {
+    text?: string;
+    loading: boolean;
+}
+export default class Loading extends React.Component<Props> {
+    constructor(props: Props);
     render(): JSX.Element;
 }
+export {};

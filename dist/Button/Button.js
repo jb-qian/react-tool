@@ -17,7 +17,7 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-10 11:08:12
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-18 16:14:25
+ * @LastEditTime: 2019-01-24 14:51:42
  */
 var React = require("react");
 var Button = /** @class */ (function (_super) {
@@ -35,7 +35,7 @@ var Button = /** @class */ (function (_super) {
         return _this;
     }
     Button.prototype.render = function () {
-        return (React.createElement("div", { style: this.props.style, className: "sq-button " + (this.props.className || '') + " " + (this.props.disabled ? 'disabled' : ''), onClick: this.click }, this.props.children));
+        return (React.createElement("button", { type: this.props.type, style: this.props.style, disabled: this.props.disabled, className: "sq-button " + (this.props.className || '') + " " + (this.props.disabled ? 'disabled' : ''), onClick: this.click }, this.props.children));
     };
     return Button;
 }(React.Component));

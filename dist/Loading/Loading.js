@@ -13,17 +13,26 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-18 16:38:49
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-01-24 15:42:12
+ */
 var React = require("react");
 var Loading = /** @class */ (function (_super) {
     __extends(Loading, _super);
-    function Loading() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Loading(props) {
+        return _super.call(this, props) || this;
     }
     Loading.prototype.render = function () {
-        return (React.createElement("div", { className: "sq-loading" },
-            React.createElement("div", { className: "sq-loading-box" },
-                React.createElement("div", { className: "sq-loading-icon" }, "icon"),
-                React.createElement("div", { className: "sq-loading-text" }, '加载中'))));
+        if (this.props.loading) {
+            return (React.createElement("div", { className: "sq-loading" },
+                React.createElement("div", { className: "sq-loading-box" },
+                    React.createElement("div", { className: "sq-loading-icon" }, "icon"),
+                    React.createElement("div", { className: "sq-loading-text" }, this.props.text || '加载中'))));
+        }
+        return (React.createElement("div", { style: { display: 'none' } }, "loading"));
     };
     return Loading;
 }(React.Component));

@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 11:08:12
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-18 16:14:25
+ * @LastEditTime: 2019-01-24 14:51:42
  */
 import * as React from 'react';
 
@@ -11,6 +11,7 @@ interface Props{
     onClick?: () => void;
     className?: string;
     style?: React.CSSProperties | undefined;
+    type?: string;
 }
 
 export default class Button extends React.Component<Props> {
@@ -28,15 +29,17 @@ export default class Button extends React.Component<Props> {
     }
     public render() {
         return (
-            <div
+            <button
+                type={ this.props.type }
                 style={ this.props.style }
+                disabled={ this.props.disabled }
                 className={ `sq-button ${this.props.className || ''} ${this.props.disabled ? 'disabled' : ''}` }
                 onClick={ this.click }
             >
                 {
                     this.props.children
                 }
-            </div>
+            </button>
         )
     }
 }

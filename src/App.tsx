@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-18 16:56:52
+ * @LastEditTime: 2019-01-24 17:52:21
  */
 import * as React from 'react';
 
@@ -14,6 +14,8 @@ import Toast from './component/Toast/Toast';
 import Button from './component/Button/Button';
 import Image from './component/Image/Image';
 import Loading from './component/Loading/Loading';
+import Form from './component/Form/Form';
+import Input from './component/Input/Input';
 
 /**
  * 设计稿750
@@ -21,7 +23,20 @@ import Loading from './component/Loading/Loading';
  */
 rem(750).set();
 
-class App extends React.Component {
+interface Props {
+	app?: boolean;
+}
+interface State {
+	loading: boolean;
+}
+
+class App extends React.Component<Props, State> {
+	constructor(props: Props){
+		super(props)
+		this.state = {
+			loading: true,
+		}
+	}
 	public toast = () => {
 		Toast({
 			duration: 3000,
@@ -34,15 +49,36 @@ class App extends React.Component {
 			title: '我是一个alert',
 		})
 	}
+	public componentDidMount (){
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			})
+		}, 1000);
+	}
+	/**
+	 * submit
+	 */
+	public submit = (form:object) => {
+		console.log(form);
+	}
 	public render() {
 		return (
 			<div className="App" >
 				<Button className={ 'my-btn br1' } onClick={ this.toast } disabled={ true }>被禁止的按钮</Button>
 				<Button className={ 'my-btn br1' } onClick={ this.toast }>Toast</Button>
 				<Button className={ 'my-btn br1' } onClick={ this.alert }>Alert</Button>
-				<Image className={ 'my-image' } src={ 'https://user-gold-cdn.xitu.io/2019/1/16/16855083bbe0082c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1' } />
 				<Image className={ 'my-image' } src={ 'https://img7.kcimg.cn/uploads/c7/4c/c74cd79689721906d4a5831031a5c8e4.jpg' } />
-				<Loading />
+				<Loading loading={ this.state.loading } />
+				<Form submit={ this.submit }>
+					<Input type={ 'password' } maxLength={ 11 } name={ 'password' } className={ 'my-input' } placeholder={ '请输入密码' } />
+					<select name="select" className="my-select">
+						<option value="0">0</option>
+						<option value="1">1</option>
+					</select>
+					<Input textarea={ true } maxLength={ 11 } name={ 'textarea' } className={ 'my-textarea' } placeholder={ '请输入密码' } />
+					<Button type={ 'submit' } className={ 'my-btn br1' }>提交</Button>
+				</Form>
 			</div>
 		);
 	}

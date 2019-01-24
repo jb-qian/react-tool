@@ -4,6 +4,7 @@ interface Props {
     onClick?: () => void;
     className?: string;
     style?: React.CSSProperties | undefined;
+    type?: string;
 }
 export default class Button extends React.Component<Props> {
     constructor(props: Props);
