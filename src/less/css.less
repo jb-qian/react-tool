@@ -32,13 +32,18 @@ body{
     margin-bottom: 10px;
 }
 .my-select{
-    display: block;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
     width: 100%;
     height: 40px;
     border: 1px solid #eee;
     padding: 0 10px;
     margin-bottom: 10px;
     border-radius: 0;
+    &.default{
+        color: #999;
+    }
 }
 .my-textarea{
     display: block;
@@ -49,4 +54,5 @@ body{
     border: 1px solid #eee;
     padding: 10px;
     margin-bottom: 10px;
+    resize: none;
 }

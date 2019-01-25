@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-24 17:52:21
+ * @LastEditTime: 2019-01-25 18:08:26
  */
 import * as React from 'react';
 
@@ -16,6 +16,7 @@ import Image from './component/Image/Image';
 import Loading from './component/Loading/Loading';
 import Form from './component/Form/Form';
 import Input from './component/Input/Input';
+import Select from './component/Select/Select';
 
 /**
  * 设计稿750
@@ -23,18 +24,32 @@ import Input from './component/Input/Input';
  */
 rem(750).set();
 
+interface Value{
+	text: string;
+	value: string | number;
+}
+
 interface Props {
 	app?: boolean;
 }
 interface State {
 	loading: boolean;
+	select: Value[];
 }
 
 class App extends React.Component<Props, State> {
 	constructor(props: Props){
 		super(props)
+		let select = [];
+		for (let i = 0; i < 100; i++) {
+			select.push({
+				text: `我是option${i}`,
+				value: i,
+			})
+		}
 		this.state = {
 			loading: true,
+			select,
 		}
 	}
 	public toast = () => {
@@ -56,9 +71,9 @@ class App extends React.Component<Props, State> {
 			})
 		}, 1000);
 	}
-	/**
-	 * submit
-	 */
+	public onSelectChange = (item:Value) => {
+		console.log(item);
+	}
 	public submit = (form:object) => {
 		console.log(form);
 	}
@@ -71,12 +86,27 @@ class App extends React.Component<Props, State> {
 				<Image className={ 'my-image' } src={ 'https://img7.kcimg.cn/uploads/c7/4c/c74cd79689721906d4a5831031a5c8e4.jpg' } />
 				<Loading loading={ this.state.loading } />
 				<Form submit={ this.submit }>
-					<Input type={ 'password' } maxLength={ 11 } name={ 'password' } className={ 'my-input' } placeholder={ '请输入密码' } />
-					<select name="select" className="my-select">
-						<option value="0">0</option>
-						<option value="1">1</option>
-					</select>
-					<Input textarea={ true } maxLength={ 11 } name={ 'textarea' } className={ 'my-textarea' } placeholder={ '请输入密码' } />
+					<Input
+						type={ 'password' }
+						maxLength={ 11 }
+						name={ 'password' }
+						className={ 'my-input' }
+						placeholder={ '请输入密码' }
+					/>
+					<Select
+						data={ this.state.select }
+						onChange={ this.onSelectChange }
+						name={ 'select' }
+						className={ 'my-select' }
+						defaultValue={ this.state.select[0] }
+					/>
+					<Input
+						textarea={ true }
+						maxLength={ 11 }
+						name={ 'textarea' }
+						className={ 'my-textarea' }
+						placeholder={ '请输入密码' }
+					/>
 					<Button type={ 'submit' } className={ 'my-btn br1' }>提交</Button>
 				</Form>
 			</div>

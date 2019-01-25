@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 09:15:22
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-18 15:44:21
+ * @LastEditTime: 2019-01-25 11:47:25
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -20,7 +20,7 @@ export interface Props {
     text: string;
 }
 
-const App = (props:Props) => {
+const App = (props: Props) => {
     const div = document.createElement('div');
 
     document.body.appendChild(div);
