@@ -22,10 +22,19 @@
     top: 0;
     bottom: 0;
     z-index: 9;
+    touch-action: none;
 }
 .sq-select-mask{
     background-color: rgba(0, 0, 0, .4);
     animation: opacity .25s both;
+}
+.sq-select-mask-content{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 9;
 }
 .sq-select-box{
     position: absolute;
@@ -43,26 +52,22 @@
     flex: 1;
     display: flex;
     position: relative;
-    touch-action: pan-y;
 }
 .sq-select-list-items{
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 36px;
     position: absolute;
     top: 50%;
     margin-top: -18px;
     transform-style: preserve-3d;
-    transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
-    transition: all 100ms ease-out 0s;
+    z-index: 1;
 }
 .sq-select-list-item{
     padding: 5px;
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
     width: 100%;
     height: 100%;
@@ -70,4 +75,12 @@
     align-items: center;
     justify-content: center;
     position: absolute;
+    opacity: 0;
+}
+.sq-select-active{
+    width: 100%;
+    height: 36px;
+    position: absolute;
+    top: 50%;
+    margin-top: -18px;
 }

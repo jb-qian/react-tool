@@ -12,6 +12,9 @@ interface State {
 }
 
 export default class Element extends React.Component<SelectProps, State> {
+
+    public refSelectMask:HTMLDivElement | null;
+
     constructor(props: SelectProps) {
         super(props)
         this.state = {
@@ -25,13 +28,25 @@ export default class Element extends React.Component<SelectProps, State> {
         this.props.setValue(item);
         this.props.willUnmount();
     }
-    // public componentDidMount (){
-
-    // }
+    public touch = (type: string) => {
+        let mask = this.refSelectMask;
+        if (mask) {
+            mask[type]('touchstart', this.maskTouchStart);
+        }
+    }
+    public maskTouchStart = (e: any) => {
+        e.preventDefault();
+    }
+    public componentDidMount (){
+        this.touch('addEventListener');
+    }
+    public componentWillUnmount (){
+        this.touch('removeEventListener');
+    }
     public render(){
         return (
             <div className={ `sq-select` }>
-                <div className={ `sq-select-mask` } onClick={ this.onClose } />
+                <div ref={ e => this.refSelectMask = e } className={ `sq-select-mask` } onClick={ this.onClose } />
                 <div className={ `sq-select-box` }>
                     <List onClick={ this.onClick } data={ this.props.data } />
                 </div>

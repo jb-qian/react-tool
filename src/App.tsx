@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-25 18:08:26
+ * @LastEditTime: 2019-01-30 11:16:57
  */
 import * as React from 'react';
 
@@ -41,7 +41,7 @@ class App extends React.Component<Props, State> {
 	constructor(props: Props){
 		super(props)
 		let select = [];
-		for (let i = 0; i < 100; i++) {
+		for (let i = 0; i < 30; i++) {
 			select.push({
 				text: `我是option${i}`,
 				value: i,
