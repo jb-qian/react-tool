@@ -26,6 +26,9 @@ var Element = /** @class */ (function (_super) {
             _this.props.setValue(item);
             _this.props.willUnmount();
         };
+        _this.onChange = function (item) {
+            _this.props.setValue(item);
+        };
         _this.touch = function (type) {
             var mask = _this.refSelectMask;
             if (mask) {
@@ -51,7 +54,7 @@ var Element = /** @class */ (function (_super) {
         return (React.createElement("div", { className: "sq-select" },
             React.createElement("div", { ref: function (e) { return _this.refSelectMask = e; }, className: "sq-select-mask", onClick: this.onClose }),
             React.createElement("div", { className: "sq-select-box" },
-                React.createElement(List_1["default"], { onClick: this.onClick, data: this.props.data }))));
+                React.createElement(List_1["default"], { onChange: this.onChange, data: this.props.data }))));
     };
     return Element;
 }(React.Component));

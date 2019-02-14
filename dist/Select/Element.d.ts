@@ -11,6 +11,7 @@ export default class Element extends React.Component<SelectProps, State> {
     constructor(props: SelectProps);
     onClose: () => void;
     onClick: (item: Value) => void;
+    onChange: (item: Value) => void;
     touch: (type: string) => void;
     maskTouchStart: (e: any) => void;
     componentDidMount(): void;

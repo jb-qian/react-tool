@@ -2,12 +2,12 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-30 11:16:57
+ * @LastEditTime: 2019-02-14 17:36:19
  */
 import * as React from 'react';
 
 import './less/index.less';
-import { rem } from './component/Tool/Tool';
+import { Rem } from './component/Tool/Tool';
 
 import Alert from './component/Alert/Alert';
 import Toast from './component/Toast/Toast';
@@ -18,17 +18,19 @@ import Form from './component/Form/Form';
 import Input from './component/Input/Input';
 import Select from './component/Select/Select';
 
+import cities from './static/cities';
+
 /**
  * 设计稿750
  * 100px => 1rem
  */
-rem(750).set();
+Rem.set();
 
 interface Value{
 	text: string;
 	value: string | number;
+	children?: Value[] | undefined;
 }
-
 interface Props {
 	app?: boolean;
 }
@@ -40,16 +42,9 @@ interface State {
 class App extends React.Component<Props, State> {
 	constructor(props: Props){
 		super(props)
-		let select = [];
-		for (let i = 0; i < 30; i++) {
-			select.push({
-				text: `我是option${i}`,
-				value: i,
-			})
-		}
 		this.state = {
 			loading: true,
-			select,
+			select: cities,
 		}
 	}
 	public toast = () => {
@@ -71,7 +66,7 @@ class App extends React.Component<Props, State> {
 			})
 		}, 1000);
 	}
-	public onSelectChange = (item:Value) => {
+	public onSelectChange = (item: Value[]) => {
 		console.log(item);
 	}
 	public submit = (form:object) => {

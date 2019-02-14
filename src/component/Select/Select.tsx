@@ -6,17 +6,22 @@ import Element from './Element';
 export interface Value {
     text: string;
     value: string | number;
+    children?: Value[] | undefined;
 }
 export interface Props {
     data: Value[];
-    setValue: (item: object) => void;
+    setValue: (item: Value[]) => void;
+    length: number;
+    type: string;
 }
 interface SelectProps {
     data: Value[];
     name: string;
-    onChange?: (item:Value) => void;
+    onChange?: (item: Value[]) => void;
     defaultValue?: Value;
     className?: string;
+    length?: number;
+    type?: string;
 }
 interface SelectState {
     text: string;
@@ -49,16 +54,31 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         }
     }
     public click = () => {
-        createElement({
+        let length = this.props.length || 1;
+        let selectType = 'select';
+        if (this.props.type) {
+            let type = this.props.type.split('-');
+            if (type[0] === 'cities') {
+                selectType = type[0];
+                if (type[1] && Number(type[1]) > 0) {
+                    length = Number(type[1]);
+                }else{
+                    return console.error('type格式错误，例：cities-3');
+                }
+            }
+        }
+        return createElement({
             data: this.props.data,
             setValue: this.setValue,
+            length,
+            type: selectType,
         });
     }
-    public setValue = (item: Value) => {
-        this.setState({
-            text: item.text,
-            value: item.value,
-        })
+    public setValue = (item: Value[]) => {
+        // this.setState({
+        //     text: item.text,
+        //     value: item.value,
+        // })
         this.props.onChange && this.props.onChange(item);
     }
     public onChange = (e:any) => {
@@ -74,10 +94,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
                     {
                         this.props.data.map((item, index) => {
                             return (
-                                <option
-                                    key={ `select-${index}` }
-                                    value={ item.value }
-                                >
+                                <option key={ `select-${index}` } value={ item.value } >
                                     { item.text }
                                 </option>
                             )

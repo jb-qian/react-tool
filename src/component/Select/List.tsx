@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-14 12:05:39
+ * @LastEditTime: 2019-02-14 17:35:40
  */
 import * as React from 'react';
 
@@ -17,24 +17,24 @@ interface ListProps {
 }
 /**
  * currentMove 记录移动的距离
- * iPhone苹果需要单独设置 transformOrigin 3d属性不同
  * transition 移动时候的属性
+ * data 数据
  */
 interface State{
     currentMove: number;
-    iPhone: boolean;
     transition: string;
+    data: Value[],
 }
 
 export default class List extends React.Component<ListProps, State> {
     // 转轮高度
-    public height:number = 36;
+    public height:number = 40;
     // 转轮距离
     public rotateX:number = 22;
     // 转轮最小值
     public min:number = 0;
     // 转轮最大值
-    public max:number = (this.props.data.length - 1) * this.rotateX;
+    public max:number = 0;
     // 触摸值
     public start: number = 0;
     public move: number = 0;
@@ -51,14 +51,20 @@ export default class List extends React.Component<ListProps, State> {
     public isMore: boolean = false;
     // 是否结束了
     public isInertial: boolean = false;
+    // iPhone苹果需要单独设置 transformOrigin 3d属性不同
+    public iPhone: boolean;
 
     constructor(props: ListProps) {
         super(props)
         this.state = {
             currentMove: 0,
-            iPhone: false,
             transition: '',
+            data: this.props.data,
         }
+        // 获取设备
+        let o = window.navigator.platform.toLowerCase();
+        let ua = window.navigator.userAgent.toLowerCase();
+        this.iPhone = (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1) && (o.indexOf('iphone') > -1 || o.indexOf('ipad') > -1 || o.indexOf('ipod') > -1);
     }
     public onChange = (item: Value) => {
         this.props.onChange(item);
@@ -84,6 +90,23 @@ export default class List extends React.Component<ListProps, State> {
         }
         return '';
     }
+    public init = (data: Value[]) => {
+        // 触摸值
+        this.start = 0;
+        this.move = 0;
+        this.end = 0;
+        // 是否移动了
+        this.isMore = false;
+        // 是否结束了
+        this.isInertial = false;
+        // 设置初始化state
+        this.setState({
+            data,
+            currentMove: 0,
+            transition: '',
+        })
+        this.onChange(this.props.data[0]);
+    }
     public touch = (type: string) => {
         let list = this.refSelectList;
         if (list) {
@@ -93,13 +116,23 @@ export default class List extends React.Component<ListProps, State> {
         }
     }
     public componentDidMount (){
+        if (this.state.data.length) {
+            this.init(this.state.data);
+        }
         this.touch('addEventListener');
-        let o = window.navigator.platform.toLowerCase();
-        let ua = window.navigator.userAgent.toLowerCase();
-        let iPhone = (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1) && (o.indexOf('iphone') > -1 || o.indexOf('ipad') > -1 || o.indexOf('ipod') > -1);
-        this.setState({
-            iPhone,
-        })
+    }
+    public componentDidUpdate (){
+        this.max = (this.state.data.length - 1) * this.rotateX;
+        if (this.props.data.length !== this.state.data.length) {
+            this.init(this.props.data);
+        }else{
+            let len = this.props.data.length;
+            for (let i = 0; i < len; i++) {
+                if (this.props.data[i].value !== this.state.data[i].value) {
+                    return this.init(this.props.data);
+                }
+            }
+        }
     }
     public componentWillUnmount (){
         this.touch('removeEventListener');
@@ -171,7 +204,7 @@ export default class List extends React.Component<ListProps, State> {
             let index = Math.round(this.move / this.rotateX);
             this.setTransform(index * this.rotateX, `transform 300ms ease-out 0s`);
             this.end = this.move;
-            this.props.onChange(this.props.data[index]);
+            this.props.onChange(this.state.data[index]);
         }
     }
     public onTouchEnd = (e: any) => {
@@ -184,18 +217,22 @@ export default class List extends React.Component<ListProps, State> {
         let speed = distance / end;
         let absSpeed = Math.abs(speed);
         let position = absSpeed / speed;
+        // 没有滑动
+        if (!this.isMore) {
+            absSpeed = 0;
+        }
         this.setEnd(absSpeed, position, 0);
     }
     public render(){
         let transform = `perspective(1000px) rotateY(0) rotateX(${this.state.currentMove}deg)`;
         let style = { WebkitTransform: transform, transform };
         let transformOrigin = `center center 89px`;
-        let iPhone = this.state.iPhone ? { WebkitTransformOrigin: transformOrigin, transformOrigin } : {};
+        let iPhone = this.iPhone ? { WebkitTransformOrigin: transformOrigin, transformOrigin } : {};
         return (
             <div className={ `sq-select-list` }>
                 <div className={ `sq-select-list-items` } style={{ ...style, ...iPhone, transition: this.state.transition }}>
                     {
-                        this.props.data.map((item, index) => {
+                        this.state.data.map((item, index) => {
                             return this.renderView(item, index);
                         })
                     }
