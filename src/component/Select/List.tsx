@@ -2,21 +2,21 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-30 17:24:09
+ * @LastEditTime: 2019-02-14 11:58:28
  */
 import * as React from 'react';
 
 import { Value } from './Select';
 /**
- * onClick 点击回调
+ * onChange 点击回调
  * data 转轮数据
  */
 interface ListProps {
-    onClick: (item: Value) => void;
+    onChange: (item: Value) => void;
     data: Value[];
 }
 interface State{
-    index: number;
+    currentMove: number;
     iPhone: boolean;
     transition: string;
 }
@@ -25,14 +25,14 @@ export default class List extends React.Component<ListProps, State> {
     // 转轮高度
     public height:number = 36;
     // 转轮距离
-    public rotateX:number = 20;
+    public rotateX:number = 22;
     // 转轮最小值
     public min:number = 0;
     // 转轮最大值
-    public max:number = -((this.props.data.length - 1) * this.height);
+    public max:number = (this.props.data.length - 1) * this.rotateX;
     // 触摸值
     public start: number = 0;
-    public more: number = 0;
+    public move: number = 0;
     public end: number = 0;
 
     public startY: number = 0;
@@ -43,31 +43,38 @@ export default class List extends React.Component<ListProps, State> {
     public startTime: number;
     public endTime: number;
 
-    public isMore: boolean;
+    public isMore: boolean = false;
+    public isInertial: boolean = false;
 
     constructor(props: ListProps) {
         super(props)
         this.state = {
-            index: 0,
+            currentMove: 0,
             iPhone: false,
             transition: '',
         }
     }
-    public onClick = (item: Value) => {
-        this.props.onClick(item);
+    public onChange = (item: Value) => {
+        this.props.onChange(item);
     }
+    /**
+     * 渲染列表
+     */
     public renderView = (item: Value, index: number) => {
-        let newIndex = Math.abs(index - this.state.index);
+        let newIndex = Math.abs(index - Math.round(this.state.currentMove / this.rotateX));
         let opacity = 1 - (newIndex / 10 * 2.5);
-        let transform = `translateZ(90px) rotateX(-${index * this.rotateX}deg)`;
+        let transform = `translateZ(89px) rotateX(-${index * this.rotateX}deg)`;
         let WebkitTransform = transform;
-        let transformOrigin = `center center -90px`;
+        let transformOrigin = `center center -89px`;
         let WebkitTransformOrigin = transformOrigin;
         if (opacity < 0) {
             opacity = 0;
         }
-        let style = { opacity, WebkitTransform, WebkitTransformOrigin, transformOrigin, transform };
+        let style = { opacity, WebkitTransform, WebkitTransformOrigin, transformOrigin, transform, color: '#333' };
         if (style.opacity !== 0) {
+            if (style.opacity !== 1) {
+                style.color = '#999';
+            }
             return (
                 <div style={ style } className={ `sq-select-list-item` } key={ `select-data-${index}` }>{ item.text }</div>
             )
@@ -94,73 +101,93 @@ export default class List extends React.Component<ListProps, State> {
     public componentWillUnmount (){
         this.touch('removeEventListener');
     }
-    public setTransform = (index: number, transition: string) => {
+    public setTransform = (currentMove: number, transition: string) => {
         this.setState({
-            index,
+            currentMove,
             transition,
         })
     }
     public onTouchStart = (e: any) => {
         e.preventDefault();
+        e.stopPropagation();
         let { pageY } = e.targetTouches[0];
-        this.start = pageY - (this.end || 0);
+        this.start = pageY;
         this.startY = pageY;
         this.isMore = false;
         this.startTime = +new Date();
+        this.isInertial = false;
     }
     public onTouchMove = (e: any) => {
         e.preventDefault();
+        e.stopPropagation();
         let { pageY } = e.targetTouches[0];
-        this.more = pageY - this.start;
-        this.setTransform(-(this.more / this.height), '');
+        this.move = this.start - pageY + this.end;
+        if (this.move < this.min - this.rotateX * 2) {
+            this.move = this.min - this.rotateX * 2;
+        }
+        if (this.move > this.max + this.rotateX * 2) {
+            this.move = this.max + this.rotateX * 2;
+        }
+        this.setTransform(this.move, '');
         this.isMore = true;
+        this.isInertial = false;
         this.endY = pageY;
     }
-    public setEnd = () => {
-        // height的值越小 定格的位置越精准
-        let height = 20;
-        if (Math.abs(this.end - this.more) > height) {
-            // speed越大 转的越慢 时间越久
-            let speed = 30;
-            this.more += (this.end - this.more) / speed;
-            this.setTransform(-(this.more / this.height), '');
-            requestAnimationFrame(this.setEnd);
+    public setEnd = (start: number, position: number, end: number = 0) => {
+        const t = 1000 / 60;
+        // 加速度
+        const a = -0.003;
+        // 未结束
+        if (start - end > 0 && !this.isInertial) {
+            this.isInertial = false;
+            // v末 = v初 + at
+            let newStart = start + a * t;
+            // S = vt + 1/2at^2;
+            this.move = (position * start * t) + (0.5 * a * t * t) + this.move;
+            if (this.move < this.min - this.rotateX * 2) {
+                this.move = this.min - this.rotateX * 2;
+                this.isInertial = true;
+            }
+            if (this.move > this.max + this.rotateX * 2) {
+                this.move = this.max + this.rotateX * 2;
+                this.isInertial = true;
+            }
+            this.setTransform(this.move, '');
+            // this.move = move;
+            requestAnimationFrame(() => {
+                this.setEnd(newStart, position, end);
+            });
         }else{
-            if (this.more > this.min) {
-                this.end = this.more = this.min;
+            this.isInertial = false;
+            // 结束
+            if (this.move < this.min) {
+                this.move = this.min;
             }
-            if (this.more < this.max) {
-                this.end = this.more = this.max;
+            if (this.move > this.max) {
+                this.move = this.max;
             }
-            let index = -Math.round(this.more / this.height);
-            this.end = -index * this.height;
-            this.setTransform(index, `transform .2s ease-out`);
+            let index = Math.round(this.move / this.rotateX);
+            this.setTransform(index * this.rotateX, `transform 300ms ease-out 0s`);
+            this.end = this.move;
+            this.props.onChange(this.props.data[index]);
         }
     }
     public onTouchEnd = (e: any) => {
         e.preventDefault();
+        e.stopPropagation();
         this.endTime = +new Date();
+        let distance = this.startY - this.endY;
         let end = this.endTime - this.startTime;
-        let max = 300;
-        if (end > max) {
-            end = max;
-        }
-        let time = (max - end) / 50;
-        if (this.isMore) {
-            this.end = this.more + (this.endY - this.startY) * time;
-            if (this.end > this.min) {
-                this.end = this.min + 60;
-            }
-            if (this.end < this.max) {
-                this.end = this.max - 60;
-            }
-        }
-        this.setEnd();
+        // 速度 v = s / t
+        let speed = distance / end;
+        let absSpeed = Math.abs(speed);
+        let position = absSpeed / speed;
+        this.setEnd(absSpeed, position, 0);
     }
     public render(){
-        let transform = `perspective(1000px) rotateY(0) rotateX(${this.state.index * this.rotateX}deg)`;
+        let transform = `perspective(1000px) rotateY(0) rotateX(${this.state.currentMove}deg)`;
         let style = { WebkitTransform: transform, transform };
-        let transformOrigin = `center center 90px`;
+        let transformOrigin = `center center 89px`;
         let iPhone = this.state.iPhone ? { WebkitTransformOrigin: transformOrigin, transformOrigin } : {};
         return (
             <div className={ `sq-select-list` }>

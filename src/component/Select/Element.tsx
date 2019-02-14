@@ -28,6 +28,9 @@ export default class Element extends React.Component<SelectProps, State> {
         this.props.setValue(item);
         this.props.willUnmount();
     }
+    public onChange = (item: Value) => {
+        this.props.setValue(item);
+    }
     public touch = (type: string) => {
         let mask = this.refSelectMask;
         if (mask) {
@@ -48,7 +51,7 @@ export default class Element extends React.Component<SelectProps, State> {
             <div className={ `sq-select` }>
                 <div ref={ e => this.refSelectMask = e } className={ `sq-select-mask` } onClick={ this.onClose } />
                 <div className={ `sq-select-box` }>
-                    <List onClick={ this.onClick } data={ this.props.data } />
+                    <List onChange={ this.onChange } data={ this.props.data } />
                 </div>
             </div>
         )
