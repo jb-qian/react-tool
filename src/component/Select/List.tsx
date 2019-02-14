@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-14 11:58:28
+ * @LastEditTime: 2019-02-14 12:05:39
  */
 import * as React from 'react';
 
@@ -15,6 +15,11 @@ interface ListProps {
     onChange: (item: Value) => void;
     data: Value[];
 }
+/**
+ * currentMove 记录移动的距离
+ * iPhone苹果需要单独设置 transformOrigin 3d属性不同
+ * transition 移动时候的属性
+ */
 interface State{
     currentMove: number;
     iPhone: boolean;
@@ -34,16 +39,17 @@ export default class List extends React.Component<ListProps, State> {
     public start: number = 0;
     public move: number = 0;
     public end: number = 0;
-
+    // 开始、结束的位置
     public startY: number = 0;
     public endY: number = 0;
-
-    public refSelectList:HTMLDivElement | null;
-    
+    // 开始、结束时间
     public startTime: number;
     public endTime: number;
-
+    // 获取列表元素
+    public refSelectList:HTMLDivElement | null;
+    // 是否移动了
     public isMore: boolean = false;
+    // 是否结束了
     public isInertial: boolean = false;
 
     constructor(props: ListProps) {
@@ -57,9 +63,6 @@ export default class List extends React.Component<ListProps, State> {
     public onChange = (item: Value) => {
         this.props.onChange(item);
     }
-    /**
-     * 渲染列表
-     */
     public renderView = (item: Value, index: number) => {
         let newIndex = Math.abs(index - Math.round(this.state.currentMove / this.rotateX));
         let opacity = 1 - (newIndex / 10 * 2.5);
@@ -153,7 +156,6 @@ export default class List extends React.Component<ListProps, State> {
                 this.isInertial = true;
             }
             this.setTransform(this.move, '');
-            // this.move = move;
             requestAnimationFrame(() => {
                 this.setEnd(newStart, position, end);
             });
