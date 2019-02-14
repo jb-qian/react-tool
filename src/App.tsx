@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-14 17:36:19
+ * @LastEditTime: 2019-02-14 18:18:20
  */
 import * as React from 'react';
 
@@ -94,6 +94,7 @@ class App extends React.Component<Props, State> {
 						name={ 'select' }
 						className={ 'my-select' }
 						defaultValue={ this.state.select[0] }
+						type={ 'cities-3' }
 					/>
 					<Input
 						textarea={ true }

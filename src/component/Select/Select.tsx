@@ -74,12 +74,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             type: selectType,
         });
     }
-    public setValue = (item: Value[]) => {
-        // this.setState({
-        //     text: item.text,
-        //     value: item.value,
-        // })
-        this.props.onChange && this.props.onChange(item);
+    public setValue = (data: Value[]) => {
+        let text: string[] = [];
+        let value: Array<string | number> = [];
+        data.map((item, index) => {
+            text.push(item.text);
+            value.push(item.value);
+        })
+        this.setState({
+            text: text.join(' '),
+            value: value.join(','),
+        })
+        this.props.onChange && this.props.onChange(data);
     }
     public onChange = (e:any) => {
         // 用不到
@@ -90,17 +96,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         let className = [this.props.className, defaultValue === this.state.value ? 'default' : ''].filter(item => item);
         return (
             <div className={ `${className.join(' ')}` } onClick={ this.click }>
-                <select style={{ display: 'none' }} name={ this.props.name } value={ this.state.value } onChange={ this.onChange }>
-                    {
-                        this.props.data.map((item, index) => {
-                            return (
-                                <option key={ `select-${index}` } value={ item.value } >
-                                    { item.text }
-                                </option>
-                            )
-                        })
-                    }
-                </select>
+                <select style={{ display: 'none' }} name={ this.props.name } data-value={ this.state.value } onChange={ this.onChange } />
                 { this.state.text }
             </div>
         )

@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 14:40:15
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-25 14:50:21
+ * @LastEditTime: 2019-02-14 18:22:09
  */
 import * as React from 'react';
 
@@ -27,7 +27,11 @@ export default class Form extends React.Component<Props> {
                 let target = e.target[key];
                 let element = ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(target.nodeName);
                 if (element !== -1) {
-                    json[target.name] = target.value;
+                    if (target.nodeName === 'SELECT') {
+                        json[target.name] = target.getAttribute('data-value');
+                    }else{
+                        json[target.name] = target.value;
+                    }
                 }
             }
         }
