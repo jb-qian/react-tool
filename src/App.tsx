@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-15 15:27:06
+ * @LastEditTime: 2019-02-15 16:34:32
  */
 import * as React from 'react';
 
@@ -90,13 +90,14 @@ class App extends React.Component<Props, State> {
 				<Button className={ 'my-btn br1' } onClick={ this.alert }>Alert</Button>
 				<Image className={ 'my-image' } src={ 'https://img7.kcimg.cn/uploads/c7/4c/c74cd79689721906d4a5831031a5c8e4.jpg' } />
 				<Loading loading={ this.state.loading } />
-				<Form submit={ this.submit }>
+				<Form submit={ this.submit } toast={ Toast }>
 					<Input
 						type={ 'password' }
 						maxLength={ 11 }
 						name={ 'password' }
 						className={ 'my-input' }
 						placeholder={ '请输入密码' }
+						error={ '请输入密码' }
 					/>
 					<Select
 						data={ this.state.select }
@@ -104,6 +105,7 @@ class App extends React.Component<Props, State> {
 						name={ 'username' }
 						className={ 'my-select' }
 						placeholder={ '请选择名称' }
+						error={ '请选择名称' }
 					/>
 					<Date
 						begin={ 2008 }
@@ -112,19 +114,22 @@ class App extends React.Component<Props, State> {
 						name={ 'time' }
 						className={ 'my-select' }
 						placeholder={ '请选择时间' }
+						error={ '请选择时间' }
 					/>
 					<Cities
 						onConfirm={ this.onSelectChange }
 						name={ 'cities' }
 						className={ 'my-select' }
 						placeholder={ '请选择城市' }
+						error={ '请选择城市' }
 					/>
 					<Input
-						textarea={ true }
+						type={ 'textarea' }
 						maxLength={ 100 }
 						name={ 'textarea' }
 						className={ 'my-textarea' }
 						placeholder={ '请输入文字' }
+						error={ '请输入文字' }
 					/>
 					<Button type={ 'submit' } className={ 'my-btn br1' }>提交</Button>
 				</Form>

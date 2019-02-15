@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 15:46:24
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-24 17:27:40
+ * @LastEditTime: 2019-02-15 16:21:18
  */
 import * as React from 'react';
 
@@ -12,8 +12,8 @@ interface Props {
     name: string;
     className?: string | undefined;
     style?: React.CSSProperties | undefined;
-    textarea?: boolean;
     placeholder?: string;
+    error?: string;
 }
 
 interface InputProps extends Props {
@@ -35,8 +35,9 @@ export default class Input extends React.Component<InputProps> {
             onInput: this.props.onInput,
             onChange: this.props.onChange,
             placeholder: this.props.placeholder,
+            'data-error': this.props.error,
         }
-        if (this.props.textarea) {
+        if (this.props.type === 'textarea') {
             return (
                 <textarea
                     {...type}

@@ -24,6 +24,7 @@ export interface SelectProps {
     className?: string;
     length?: number;
     type?: string;
+    error?: string;
 }
 interface SelectState {
     text: string;
@@ -101,7 +102,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         let className = [this.props.className, defaultValue ? 'default' : ''].filter(item => item);
         return (
             <div className={ `${className.join(' ')}` } onClick={ this.click }>
-                <select style={{ display: 'none' }} name={ this.props.name } data-value={ this.state.value } onChange={ this.onChange } />
+                <select style={{ display: 'none' }} name={ this.props.name } data-error={ this.props.error } data-value={ this.state.value } onChange={ this.onChange } />
                 { this.state.text }
             </div>
         )

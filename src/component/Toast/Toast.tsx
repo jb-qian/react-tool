@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 09:15:22
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-25 11:47:25
+ * @LastEditTime: 2019-02-15 16:25:45
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -16,7 +16,7 @@ import Element from './Element';
  */
 
 export interface Props {
-    duration: number;
+    duration?: number;
     text: string;
 }
 

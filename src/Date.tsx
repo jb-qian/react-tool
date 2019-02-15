@@ -17,6 +17,7 @@ interface Props {
     defaultValue?: Value;
     className?: string;
     length?: number;
+    error?: string;
 }
 interface State {
     date: Value[];

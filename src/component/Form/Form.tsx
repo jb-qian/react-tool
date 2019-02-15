@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 14:40:15
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-14 18:22:09
+ * @LastEditTime: 2019-02-15 16:29:02
  */
 import * as React from 'react';
 
@@ -13,6 +13,7 @@ import * as React from 'react';
 
 interface Props{
     submit?: (json:object) => void;
+    toast?: any;
 }
 
 export default class Form extends React.Component<Props> {
@@ -31,6 +32,12 @@ export default class Form extends React.Component<Props> {
                         json[target.name] = target.getAttribute('data-value');
                     }else{
                         json[target.name] = target.value;
+                    }
+                    let text = target.getAttribute('data-error');
+                    if (text && !json[target.name]) {
+                        return this.props.toast && this.props.toast({
+                            text,
+                        })
                     }
                 }
             }

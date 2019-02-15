@@ -17,6 +17,7 @@ interface Props {
     className?: string;
     length?: number;
     type?: string;
+    error?: string;
 }
 interface State {
     cities: Value[];
