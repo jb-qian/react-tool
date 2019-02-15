@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-14 18:18:20
+ * @LastEditTime: 2019-02-15 15:27:06
  */
 import * as React from 'react';
 
@@ -18,7 +18,8 @@ import Form from './component/Form/Form';
 import Input from './component/Input/Input';
 import Select from './component/Select/Select';
 
-import cities from './static/cities';
+import Cities from './Cities';
+import Date from './Date';
 
 /**
  * 设计稿750
@@ -44,7 +45,16 @@ class App extends React.Component<Props, State> {
 		super(props)
 		this.state = {
 			loading: true,
-			select: cities,
+			select: [{
+				value: 0,
+				text: '卡车之家',
+			},{
+				value: 1,
+				text: '卡家二手车',
+			},{
+				value: 2,
+				text: '卡家好车',
+			}]
 		}
 	}
 	public toast = () => {
@@ -90,18 +100,31 @@ class App extends React.Component<Props, State> {
 					/>
 					<Select
 						data={ this.state.select }
-						onChange={ this.onSelectChange }
-						name={ 'select' }
+						onConfirm={ this.onSelectChange }
+						name={ 'username' }
 						className={ 'my-select' }
-						defaultValue={ this.state.select[0] }
-						type={ 'cities-3' }
+						placeholder={ '请选择名称' }
+					/>
+					<Date
+						begin={ 2008 }
+						end={ 2019 }
+						onConfirm={ this.onSelectChange }
+						name={ 'time' }
+						className={ 'my-select' }
+						placeholder={ '请选择时间' }
+					/>
+					<Cities
+						onConfirm={ this.onSelectChange }
+						name={ 'cities' }
+						className={ 'my-select' }
+						placeholder={ '请选择城市' }
 					/>
 					<Input
 						textarea={ true }
-						maxLength={ 11 }
+						maxLength={ 100 }
 						name={ 'textarea' }
 						className={ 'my-textarea' }
-						placeholder={ '请输入密码' }
+						placeholder={ '请输入文字' }
 					/>
 					<Button type={ 'submit' } className={ 'my-btn br1' }>提交</Button>
 				</Form>

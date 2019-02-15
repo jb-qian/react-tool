@@ -17,7 +17,7 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-24 14:40:15
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-25 14:50:21
+ * @LastEditTime: 2019-02-14 18:22:09
  */
 var React = require("react");
 var Form = /** @class */ (function (_super) {
@@ -32,7 +32,12 @@ var Form = /** @class */ (function (_super) {
                     var target = e.target[key];
                     var element = ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(target.nodeName);
                     if (element !== -1) {
-                        json[target.name] = target.value;
+                        if (target.nodeName === 'SELECT') {
+                            json[target.name] = target.getAttribute('data-value');
+                        }
+                        else {
+                            json[target.name] = target.value;
+                        }
                     }
                 }
             }

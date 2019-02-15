@@ -19,6 +19,8 @@ export default class Element extends React.Component<SelectProps, State> {
 
     public timer: NodeJS.Timeout;
 
+    public reflist = {};
+
     constructor(props: SelectProps) {
         super(props)
         this.state = {
@@ -29,7 +31,43 @@ export default class Element extends React.Component<SelectProps, State> {
             value: [],
         }
     }
+    public initNumber = (num: number | string) => {
+        if (num < 10) {
+            num = `0${num}`;
+        }
+        return num;
+    }
+    public getMonth = () => {
+        let arr: Value[] = [];
+        for (let i = 1; i <= 12; i++) {
+            arr.push({
+                value: this.initNumber(i),
+                text: `${this.initNumber(i)}`,
+            })
+        }
+        return arr;
+    }
+    public getDate = (year: number | string, month: number | string) => {
+        year = Number(year);
+        month = Number(month);
+        let arr: Value[] = [];
+        let max = [1, 3, 5, 7, 8, 10, 12].indexOf(month) !== -1 ? 31 : 30;
+        if (month === 2) {
+            max = (year % 400 === 0 || year % 4 === 0 && year % 100 !== 0) ? 29 : 28;
+        }
+        for (let i = 1; i <= max; i++) {
+            arr.push({
+                value: this.initNumber(i),
+                text: `${this.initNumber(i)}`,
+            })
+        }
+        return arr;
+    }
     public onClose = () => {
+        this.props.willUnmount();
+    }
+    public onConfirm = () => {
+        this.props.setValue(this.state.value, true);
         this.props.willUnmount();
     }
     public onChange = (index: number, item: Value = { value: '', text: '' }) => {
@@ -51,6 +89,19 @@ export default class Element extends React.Component<SelectProps, State> {
                 data,
             }
         })
+        // 时间单独处理
+        if (this.props.type === 'date') {
+            this.setState(prev => {
+                let data = [...prev.data];
+                data[1] = this.getMonth();
+                let year = (this.state.value[0] || { value: 1970 }).value;
+                let month = (this.state.value[1] || { value: 1 }).value;
+                data[2] = this.getDate(year, month);
+                return {
+                    data,
+                }
+            })
+        }
     }
     public touch = (type: string) => {
         let mask = this.refSelectMask;
@@ -88,11 +139,18 @@ export default class Element extends React.Component<SelectProps, State> {
             <div className={ `sq-select` }>
                 <div ref={ e => this.refSelectMask = e } className={ `sq-select-mask` } />
                 <div className={ `sq-select-box` }>
-                    {
-                        this.listView().map((item, index) => {
-                            return item;
-                        })
-                    }
+                    <div className={ 'sq-select-head brb' }>
+                        <div className={ 'sq-select-head-btn' } onClick={ this.onClose }>取消</div>
+                        <div className={ 'sq-select-head-title' }>请选择</div>
+                        <div className={ 'sq-select-head-btn active' } onClick={ this.onConfirm }>确定</div>
+                    </div>
+                    <div className={ 'sq-list' }>
+                        {
+                            this.listView().map((item, index) => {
+                                return item;
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         )

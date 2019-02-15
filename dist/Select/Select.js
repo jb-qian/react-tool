@@ -32,24 +32,46 @@ var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
     function Select(props) {
         var _this = _super.call(this, props) || this;
+        _this.defaultValue = { value: '', text: '' };
         _this.click = function () {
-            createElement({
+            return createElement({
                 data: _this.props.data,
-                setValue: _this.setValue
+                setValue: _this.setValue,
+                length: _this.props.length || 1,
+                type: _this.props.type || ''
             });
         };
-        _this.setValue = function (item) {
-            _this.setState({
-                text: item.text,
-                value: item.value
-            });
-            _this.props.onChange && _this.props.onChange(item);
+        _this.setValue = function (data, isConfirm) {
+            // 点击确定按钮
+            if (isConfirm) {
+                _this.props.onConfirm && _this.props.onConfirm(data);
+                var text_1 = [];
+                var value_1 = [];
+                data.map(function (item) {
+                    text_1.push(item.text);
+                    value_1.push(item.value);
+                });
+                var textJoin = ' ';
+                var valueJoin = ',';
+                if (_this.props.type === 'date') {
+                    textJoin = '-';
+                    valueJoin = '-';
+                }
+                _this.setState({
+                    text: text_1.join(textJoin),
+                    value: value_1.join(valueJoin)
+                });
+            }
+            else {
+                _this.props.onChange && _this.props.onChange(data);
+            }
         };
         _this.onChange = function (e) {
             // 用不到
             console.log(e);
         };
-        var _a = _this.props.defaultValue || _this.props.data[0], value = _a.value, text = _a.text;
+        _this.defaultValue.text = _this.props.placeholder || '请选择';
+        var _a = _this.props.defaultValue || _this.defaultValue, value = _a.value, text = _a.text;
         _this.state = {
             value: value,
             text: text
@@ -57,12 +79,10 @@ var Select = /** @class */ (function (_super) {
         return _this;
     }
     Select.prototype.render = function () {
-        var defaultValue = (this.props.defaultValue || this.props.data[0]).value;
-        var className = [this.props.className, defaultValue === this.state.value ? 'default' : ''].filter(function (item) { return item; });
+        var defaultValue = !(this.props.defaultValue || this.defaultValue).value && !this.state.value;
+        var className = [this.props.className, defaultValue ? 'default' : ''].filter(function (item) { return item; });
         return (React.createElement("div", { className: "" + className.join(' '), onClick: this.click },
-            React.createElement("select", { style: { display: 'none' }, name: this.props.name, value: this.state.value, onChange: this.onChange }, this.props.data.map(function (item, index) {
-                return (React.createElement("option", { key: "select-" + index, value: item.value }, item.text));
-            })),
+            React.createElement("select", { style: { display: 'none' }, name: this.props.name, "data-value": this.state.value, onChange: this.onChange }),
             this.state.text));
     };
     return Select;

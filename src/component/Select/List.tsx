@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-14 17:35:40
+ * @LastEditTime: 2019-02-15 15:20:08
  */
 import * as React from 'react';
 
@@ -10,6 +10,7 @@ import { Value } from './Select';
 /**
  * onChange 点击回调
  * data 转轮数据
+ * hash 数据更新标识符
  */
 interface ListProps {
     onChange: (item: Value) => void;
@@ -19,11 +20,12 @@ interface ListProps {
  * currentMove 记录移动的距离
  * transition 移动时候的属性
  * data 数据
+ * hash 数据更新标识符
  */
 interface State{
     currentMove: number;
     transition: string;
-    data: Value[],
+    data: Value[];
 }
 
 export default class List extends React.Component<ListProps, State> {

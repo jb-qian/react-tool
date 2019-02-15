@@ -28,7 +28,7 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-14 12:05:39
+ * @LastEditTime: 2019-02-15 15:20:08
  */
 var React = require("react");
 var List = /** @class */ (function (_super) {
@@ -36,13 +36,13 @@ var List = /** @class */ (function (_super) {
     function List(props) {
         var _this = _super.call(this, props) || this;
         // 转轮高度
-        _this.height = 36;
+        _this.height = 40;
         // 转轮距离
         _this.rotateX = 22;
         // 转轮最小值
         _this.min = 0;
         // 转轮最大值
-        _this.max = (_this.props.data.length - 1) * _this.rotateX;
+        _this.max = 0;
         // 触摸值
         _this.start = 0;
         _this.move = 0;
@@ -75,6 +75,23 @@ var List = /** @class */ (function (_super) {
                 return (React.createElement("div", { style: style, className: "sq-select-list-item", key: "select-data-" + index }, item.text));
             }
             return '';
+        };
+        _this.init = function (data) {
+            // 触摸值
+            _this.start = 0;
+            _this.move = 0;
+            _this.end = 0;
+            // 是否移动了
+            _this.isMore = false;
+            // 是否结束了
+            _this.isInertial = false;
+            // 设置初始化state
+            _this.setState({
+                data: data,
+                currentMove: 0,
+                transition: ''
+            });
+            _this.onChange(_this.props.data[0]);
         };
         _this.touch = function (type) {
             var list = _this.refSelectList;
@@ -153,7 +170,7 @@ var List = /** @class */ (function (_super) {
                 var index = Math.round(_this.move / _this.rotateX);
                 _this.setTransform(index * _this.rotateX, "transform 300ms ease-out 0s");
                 _this.end = _this.move;
-                _this.props.onChange(_this.props.data[index]);
+                _this.props.onChange(_this.state.data[index]);
             }
         };
         _this.onTouchEnd = function (e) {
@@ -166,23 +183,42 @@ var List = /** @class */ (function (_super) {
             var speed = distance / end;
             var absSpeed = Math.abs(speed);
             var position = absSpeed / speed;
+            // 没有滑动
+            if (!_this.isMore) {
+                absSpeed = 0;
+            }
             _this.setEnd(absSpeed, position, 0);
         };
         _this.state = {
             currentMove: 0,
-            iPhone: false,
-            transition: ''
+            transition: '',
+            data: _this.props.data
         };
+        // 获取设备
+        var o = window.navigator.platform.toLowerCase();
+        var ua = window.navigator.userAgent.toLowerCase();
+        _this.iPhone = (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1) && (o.indexOf('iphone') > -1 || o.indexOf('ipad') > -1 || o.indexOf('ipod') > -1);
         return _this;
     }
     List.prototype.componentDidMount = function () {
+        if (this.state.data.length) {
+            this.init(this.state.data);
+        }
         this.touch('addEventListener');
-        var o = window.navigator.platform.toLowerCase();
-        var ua = window.navigator.userAgent.toLowerCase();
-        var iPhone = (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1) && (o.indexOf('iphone') > -1 || o.indexOf('ipad') > -1 || o.indexOf('ipod') > -1);
-        this.setState({
-            iPhone: iPhone
-        });
+    };
+    List.prototype.componentDidUpdate = function () {
+        this.max = (this.state.data.length - 1) * this.rotateX;
+        if (this.props.data.length !== this.state.data.length) {
+            this.init(this.props.data);
+        }
+        else {
+            var len = this.props.data.length;
+            for (var i = 0; i < len; i++) {
+                if (this.props.data[i].value !== this.state.data[i].value) {
+                    return this.init(this.props.data);
+                }
+            }
+        }
     };
     List.prototype.componentWillUnmount = function () {
         this.touch('removeEventListener');
@@ -192,9 +228,9 @@ var List = /** @class */ (function (_super) {
         var transform = "perspective(1000px) rotateY(0) rotateX(" + this.state.currentMove + "deg)";
         var style = { WebkitTransform: transform, transform: transform };
         var transformOrigin = "center center 89px";
-        var iPhone = this.state.iPhone ? { WebkitTransformOrigin: transformOrigin, transformOrigin: transformOrigin } : {};
+        var iPhone = this.iPhone ? { WebkitTransformOrigin: transformOrigin, transformOrigin: transformOrigin } : {};
         return (React.createElement("div", { className: "sq-select-list" },
-            React.createElement("div", { className: "sq-select-list-items", style: __assign({}, style, iPhone, { transition: this.state.transition }) }, this.props.data.map(function (item, index) {
+            React.createElement("div", { className: "sq-select-list-items", style: __assign({}, style, iPhone, { transition: this.state.transition }) }, this.state.data.map(function (item, index) {
                 return _this.renderView(item, index);
             })),
             React.createElement("div", { className: "sq-select-active brt brb" }),
