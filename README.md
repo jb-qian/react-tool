@@ -2,13 +2,32 @@
 
 react工具集合
 
+* [Button 按钮](#button)
 * [Toast 提示](#toast)
 * [Alert 弹出窗口](#alert)
+* [Loading 加载动画](#loading)
+* [Image 图片](#image)
 * [Select 选择器](#select)
 
 [Demo](https://jb-qian.github.io/react-tool/build/) (**组件不包括UI样式**)
 
-持续更新
+## <a name="button">Button 按钮</a>
+```
+<Button
+    className={ 'my-btn br1' }
+    onClick={ this.onClick }
+    disabled={ false }
+>我是一个按钮</Button>
+```
+属性 | 说明 | 类型 | 默认值
+ ---- | ----- | ------ | ------
+ disabled? | 是否禁止点击 | boolean | 无
+ onClick? | 点击触发 | () => void | 无
+ className? | 样式名 | string | 无
+ style? | style | React.CSSProperties | undefined | 无
+ type? | html的type | string | 无
+
+---------------------------------------------------------------------
 
 ## <a name="toast">Toast 提示</a>
 ```
@@ -21,6 +40,8 @@ Toast({
  ---- | ----- | ------ | ------
  text | 提示文字 | string | 无
  duration? | 持续时间 | number | 3000
+ 
+ ---------------------------------------------------------------------
  
  ## <a name="alert">Alert 弹出窗口</a>
 ```
@@ -37,6 +58,40 @@ Alert({
  noPrimary? | 设置没有确定按钮 | boolean | false
  default? | 点击取消时调用 | () => void | 无
  primary? | 点击确定时调用 | () => void | 无
+ 
+ ---------------------------------------------------------------------
+ 
+ ## <a name="loading">Loading 加载动画</a>
+ ```
+ <Loading
+    loading={ true }
+ />
+ ```
+ 属性 | 说明 | 类型 | 默认值
+ ---- | ----- | ------ | ------
+ loading | loading状态 | boolean | false
+ text? | 文字内容 | string | 加载中
+ 
+ ---------------------------------------------------------------------
+ 
+  ## <a name="image">Image 图片</a>
+ ```
+ <Image
+    className={ 'my-image' }
+    src={ 'https://img7.kcimg.cn/uploads/c7/4c/c74cd79689721906d4a5831031a5c8e4.jpg' }
+    alt={ '图片' }
+ />
+ ```
+ 属性 | 说明 | 类型 | 默认值
+ ---- | ----- | ------ | ------
+ src | 显示图片地址 | string | 无
+ alt? | 图片文案 | string | 无
+ className? | 样式名称 | string | 无
+ defaultSrc? | 默认图片地址 | string | 无
+ onSuccess? | 成功加载的回调 | () => void | 无
+ onError? | 错误加载的回调 | (e: any) => void | 无
+ 
+ ---------------------------------------------------------------------
 
 ## <a name="select">Select 选择器</a>
 ```
