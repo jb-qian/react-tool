@@ -7,8 +7,12 @@ react工具集合
 持续更新
 
 ```
-    function fun(){
-         echo "这是一句非常牛逼的代码";
-    }
-    fun();
+<Select
+    data={ this.state.select }
+    onConfirm={ this.onSelectChange }
+    name={ 'username' }
+    className={ 'my-select' }
+    placeholder={ '请选择名称' }
+    error={ '请选择名称' }
+/>
 ```
