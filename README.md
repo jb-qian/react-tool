@@ -16,9 +16,23 @@ react工具集合
 let data = [{
     value: 0,
     text: '选项1',
+    children: [{
+        value: 0,
+        text: '选项1-1',
+    },{
+        value: 1,
+        text: '选项1-2',
+    }]
 },{
     value: 1,
     text: '选项2',
+    children: [{
+        value: 0,
+        text: '选项2-1',
+    },{
+        value: 1,
+        text: '选项2-2',
+    }]
 }]
 <Select
     data={ data }
@@ -26,6 +40,7 @@ let data = [{
     name={ 'username' }
     className={ 'my-select' }
     placeholder={ '请选择名称' }
+    length={ 2 }
     error={ '请选择名称' }
 />
 ```
