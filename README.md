@@ -4,9 +4,7 @@ react工具集合
 
 * [Select 选择器](#select)
 
-[demo](https://jb-qian.github.io/react-tool/build/) 
-
-**组件不包括UI样式**
+[Demo](https://jb-qian.github.io/react-tool/build/) (**组件不包括UI样式**)
 
 持续更新
 
