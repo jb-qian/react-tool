@@ -7,6 +7,7 @@ react工具集合
 持续更新
 
 ```
+// 时间选择
 <Select
     data={ this.state.select }
     onConfirm={ this.onSelectChange }
