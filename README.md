@@ -8,6 +8,7 @@
 * [Loading 加载动画](#loading)
 * [Image 图片](#image)
 * [Select 选择器](#select)
+* [Input 输入框](#input)
 * [Form 表单](#form)
 
 [Demo](https://jb-qian.github.io/react-tool/build/) (**组件不包括UI样式**)
@@ -25,7 +26,7 @@
  disabled? | 是否禁止点击 | boolean | 无
  onClick? | 点击触发 | () => void | 无
  className? | 样式名 | string | 无
- style? | style | React.CSSProperties | undefined | 无
+ style? | style | React.CSSProperties | 无
  type? | html的type | string | 无
 
 ---------------------------------------------------------------------
@@ -152,6 +153,31 @@ interface Value {
  type? | 选择器类型，可选 'date' | string | 无
  error? | 错误提示，配合form表单使用，如果设置此项，在form中表示必填 | string | 无
  
+ ---------------------------------------------------------------------
+ 
+ ## <a name="input">Input 输入框</a>
+ ```
+ <Input
+    type={ 'password' }
+    maxLength={ 10 }
+    name={ 'password' }
+    className={ 'my-input' }
+    placeholder={ '请输入密码' }
+    error={ '请输入密码' }
+/>
+ ```
+ 属性 | 说明 | 类型 | 默认值
+ ---- | ----- | ------ | ------
+ name | input的name属性 | string | 无
+ type? | input的type属性，若设置为 textarea 则为 textarea元素 | string | 无
+ maxLength? | input的maxLength属性 | number | 无
+ className? | 样式名 | string | 无
+ style? | style | React.CSSProperties | 无
+ placeholder? | 默认文案 | string | 无
+ error? | 错误提示，配合form表单使用，如果设置此项，在form中表示必填 | string | 无
+ 
+ ---------------------------------------------------------------------
+ 
  ## <a name="form">Form 表单</a>
  ```
  <Form submit={ this.submit } toast={ Toast }>
@@ -187,5 +213,3 @@ interface Value {
  ---- | ----- | ------ | ------
  submit? | 提交表单 返回表单内input、select、textarea等原生html元素的json对象，例：{password: 123, textarea: 666} | (json:object) => void | 无
  toast? | 提示器 | any | 无
- 
- ---------------------------------------------------------------------
