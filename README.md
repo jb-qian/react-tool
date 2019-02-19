@@ -2,12 +2,15 @@
 
 react工具集合
 
+* [Select 选择器](#select)
+
 [demo](https://jb-qian.github.io/react-tool/build/) 
 
 **组件不包括UI样式**
 
 持续更新
 
+## <a name="select">Select</a>
 ```
 // 数据
 let data = [{
@@ -17,7 +20,6 @@ let data = [{
     value: 1,
     text: '选项2',
 }]
-// 选择器
 <Select
     data={ data }
     onConfirm={ this.onConfirm }
@@ -44,7 +46,7 @@ interface Value {
  name | select的name属性 | string | 无
  onChange? | 选择器改变后触发 | (item: Value[]) => void | 无
  onConfirm? | 确认按钮触发 | (item: Value[]) => void | 无
- placeholder? | 未选择默认文案 | string | 无
+ placeholder? | 未选择默认文案 | string | 请选择
  defaultValue? | 默认选项 | Value | 无
  className? | 样式名称 | string | 无
  length? | 选择器数量 | number | 1
