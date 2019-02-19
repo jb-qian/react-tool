@@ -2,13 +2,43 @@
 
 react工具集合
 
+* [Toast 提示](#toast)
+* [Alert 弹出窗口](#alert)
 * [Select 选择器](#select)
 
 [Demo](https://jb-qian.github.io/react-tool/build/) (**组件不包括UI样式**)
 
 持续更新
 
-## <a name="select">Select</a>
+## <a name="toast">Toast 提示</a>
+```
+Toast({
+    duration: 3000,
+    text: '我是一个3秒的toast',
+})
+```
+属性 | 说明 | 类型 | 默认值
+ ---- | ----- | ------ | ------
+ text | 提示文字 | string | 无
+ duration? | 持续时间 | number | 3000
+ 
+ ## <a name="alert">Alert 弹出窗口</a>
+```
+Alert({
+    subtitle: '我是副标题',
+    title: '我是一个alert',
+})
+```
+属性 | 说明 | 类型 | 默认值
+ ---- | ----- | ------ | ------
+ title | 提示标题 | string | 无
+ subtitle? | 提示内容 | string | 无
+ noDefault? | 设置没有取消按钮 | boolean | false
+ noPrimary? | 设置没有确定按钮 | boolean | false
+ default? | 点击取消时调用 | () => void | 无
+ primary? | 点击确定时调用 | () => void | 无
+
+## <a name="select">Select 选择器</a>
 ```
 // 数据
 let data = [{
