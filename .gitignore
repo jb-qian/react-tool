@@ -10,7 +10,6 @@
 /public
 /config
 /scripts
-/build
 
 # misc
 .DS_Store
