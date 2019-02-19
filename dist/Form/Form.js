@@ -17,7 +17,7 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-24 14:40:15
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-14 18:22:09
+ * @LastEditTime: 2019-02-19 17:46:16
  */
 var React = require("react");
 var Form = /** @class */ (function (_super) {
@@ -37,6 +37,12 @@ var Form = /** @class */ (function (_super) {
                         }
                         else {
                             json[target.name] = target.value;
+                        }
+                        var text = target.getAttribute('data-error');
+                        if (text && !json[target.name]) {
+                            return _this.props.toast && _this.props.toast({
+                                text: text
+                            });
                         }
                     }
                 }

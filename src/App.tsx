@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-15 16:34:32
+ * @LastEditTime: 2019-02-19 17:55:55
  */
 import * as React from 'react';
 
@@ -93,7 +93,7 @@ class App extends React.Component<Props, State> {
 				<Form submit={ this.submit } toast={ Toast }>
 					<Input
 						type={ 'password' }
-						maxLength={ 11 }
+						maxLength={ 10 }
 						name={ 'password' }
 						className={ 'my-input' }
 						placeholder={ '请输入密码' }

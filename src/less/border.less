@@ -31,24 +31,25 @@
 		transform-origin: 0 0;
 	}
 }
-@media not all, only screen and (-webkit-min-device-pixel-ratio: 1.5){
-	.brb:after,
-	.brt:before {
-		transform: scaleY(.667);
-		transform-origin: 50% 100% !important;
-	}
-	.brl:before,
-	.brr:after {
-		transform: scaleX(.667);
-		transform-origin: 100% 50% !important;
-	}
-	.br1:after {
-		width: 150%;
-		height: 150%;
-		transform: scale(.667);
-	}
-}
-@media not all, only screen and (-webkit-min-device-pixel-ratio: 2){
+// @media not all, only screen and (-webkit-min-device-pixel-ratio: 1.5){
+// 	.brb:after,
+// 	.brt:before {
+// 		transform: scaleY(.667);
+// 		transform-origin: 50% 100% !important;
+// 	}
+// 	.brl:before,
+// 	.brr:after {
+// 		transform: scaleX(.667);
+// 		transform-origin: 100% 50% !important;
+// 	}
+// 	.br1:after {
+// 		width: 150%;
+// 		height: 150%;
+// 		transform: scale(.667);
+// 	}
+// }
+@media (-webkit-min-device-pixel-ratio:2), (min-resolution:2dppx) {
+// @media not all, only screen and (-webkit-min-device-pixel-ratio: 2){
 	.brb:after,
 	.brt:before {
 		transform: scaleY(.5);
@@ -65,7 +66,8 @@
 		transform: scale(.5);
 	}
 }
-@media not all, only screen and (-webkit-min-device-pixel-ratio: 3){
+@media (-webkit-min-device-pixel-ratio:2) and (-webkit-min-device-pixel-ratio:3),(min-resolution:2dppx) and (min-resolution:3dppx) {
+// @media not all, only screen and (-webkit-min-device-pixel-ratio: 3){
 	.brb:after,
 	.brt:before {
 		transform: scaleY(.3333);

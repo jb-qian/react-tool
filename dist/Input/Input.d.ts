@@ -5,8 +5,8 @@ interface Props {
     name: string;
     className?: string | undefined;
     style?: React.CSSProperties | undefined;
-    textarea?: boolean;
     placeholder?: string;
+    error?: string;
 }
 interface InputProps extends Props {
     onInput?: ((event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined;

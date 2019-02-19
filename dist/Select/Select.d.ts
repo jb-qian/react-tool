@@ -10,6 +10,18 @@ export interface Props {
     length: number;
     type: string;
 }
+/**
+ * data 选择器数据
+ * name select的name属性
+ * onChange 选择器改变后触发
+ * onConfirm 确认按钮触发
+ * placeholder 未选择默认文案
+ * defaultValue 默认选项
+ * className 样式名称
+ * length 选择器数量
+ * type 选择器类型，可选 'date'
+ * error 错误提示，配合form表单使用，如果设置此项，在form中表示必填
+ */
 export interface SelectProps {
     data: Value[];
     name: string;
@@ -20,6 +32,7 @@ export interface SelectProps {
     className?: string;
     length?: number;
     type?: string;
+    error?: string;
 }
 interface SelectState {
     text: string;

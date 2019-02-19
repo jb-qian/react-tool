@@ -1,4 +1,8 @@
 import * as React from 'react';
+/**
+ * loading 状态
+ * text 文字内容
+ */
 interface Props {
     text?: string;
     loading: boolean;

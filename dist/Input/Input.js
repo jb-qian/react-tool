@@ -28,7 +28,7 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-24 15:46:24
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-24 17:27:40
+ * @LastEditTime: 2019-02-15 16:21:18
  */
 var React = require("react");
 var Input = /** @class */ (function (_super) {
@@ -45,9 +45,10 @@ var Input = /** @class */ (function (_super) {
             style: this.props.style,
             onInput: this.props.onInput,
             onChange: this.props.onChange,
-            placeholder: this.props.placeholder
+            placeholder: this.props.placeholder,
+            'data-error': this.props.error
         };
-        if (this.props.textarea) {
+        if (this.props.type === 'textarea') {
             return (React.createElement("textarea", __assign({}, type)));
         }
         return (React.createElement("input", __assign({}, type)));

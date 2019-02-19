@@ -13,6 +13,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-25 11:50:38
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-02-19 15:37:48
+ */
 var React = require("react");
 var List_1 = require("./List");
 var Element = /** @class */ (function (_super) {

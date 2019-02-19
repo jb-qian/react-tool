@@ -13,6 +13,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-25 11:28:30
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-02-19 16:57:26
+ */
 var React = require("react");
 var ReactDOM = require("react-dom");
 var Element_1 = require("./Element");
@@ -32,6 +38,7 @@ var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
     function Select(props) {
         var _this = _super.call(this, props) || this;
+        // 默认数据
         _this.defaultValue = { value: '', text: '' };
         _this.click = function () {
             return createElement({
@@ -82,7 +89,7 @@ var Select = /** @class */ (function (_super) {
         var defaultValue = !(this.props.defaultValue || this.defaultValue).value && !this.state.value;
         var className = [this.props.className, defaultValue ? 'default' : ''].filter(function (item) { return item; });
         return (React.createElement("div", { className: "" + className.join(' '), onClick: this.click },
-            React.createElement("select", { style: { display: 'none' }, name: this.props.name, "data-value": this.state.value, onChange: this.onChange }),
+            React.createElement("select", { style: { display: 'none' }, name: this.props.name, "data-error": this.props.error, "data-value": this.state.value, onChange: this.onChange }),
             this.state.text));
     };
     return Select;

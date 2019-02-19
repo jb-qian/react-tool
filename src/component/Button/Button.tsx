@@ -2,9 +2,17 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 11:08:12
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-24 14:51:42
+ * @LastEditTime: 2019-02-19 17:28:27
  */
 import * as React from 'react';
+
+/**
+ * disabled 是否禁止点击
+ * onClick 点击触发
+ * className 样式名
+ * style style
+ * type html的type
+ */
 
 interface Props{
     disabled?: boolean;

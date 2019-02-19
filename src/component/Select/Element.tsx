@@ -1,3 +1,9 @@
+/*
+ * @Author: 宋乾
+ * @Date: 2019-01-25 11:50:38
+ * @LastEditors: 宋乾
+ * @LastEditTime: 2019-02-19 15:37:48
+ */
 import * as React from 'react';
 
 import { Props, Value } from './Select';
