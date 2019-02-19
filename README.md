@@ -26,7 +26,11 @@ let data = [{
     placeholder={ '请选择名称' }
     error={ '请选择名称' }
 />
-
+```
+举例：
+[时间选择器](https://github.com/jb-qian/react-tool/blob/master/src/Date.tsx)、
+[城市选择器](https://github.com/jb-qian/react-tool/blob/master/src/Cities.tsx)
+```
 // 接口
 interface Value {
     text: string;
