@@ -1,6 +1,6 @@
 # react-tool 组件库
 
-react工具集合
+## 工具列表
 
 * [Button 按钮](#button)
 * [Toast 提示](#toast)
@@ -8,6 +8,7 @@ react工具集合
 * [Loading 加载动画](#loading)
 * [Image 图片](#image)
 * [Select 选择器](#select)
+* [Form 表单](#form)
 
 [Demo](https://jb-qian.github.io/react-tool/build/) (**组件不包括UI样式**)
 
@@ -150,3 +151,41 @@ interface Value {
  length? | 选择器数量 | number | 1
  type? | 选择器类型，可选 'date' | string | 无
  error? | 错误提示，配合form表单使用，如果设置此项，在form中表示必填 | string | 无
+ 
+ ## <a name="form">Form 表单</a>
+ ```
+ <Form submit={ this.submit } toast={ Toast }>
+    <Input
+        type={ 'password' }
+        maxLength={ 10 }
+        name={ 'password' }
+        className={ 'my-input' }
+        placeholder={ '请输入密码' }
+        error={ '请输入密码' }
+    />
+    <Date
+        begin={ 2008 }
+        end={ 2019 }
+        onConfirm={ this.onConfirm }
+        name={ 'time' }
+        className={ 'my-select' }
+        placeholder={ '请选择时间' }
+        error={ '请选择时间' }
+    />
+    <Input
+        type={ 'textarea' }
+        maxLength={ 100 }
+        name={ 'textarea' }
+        className={ 'my-textarea' }
+        placeholder={ '请输入文字' }
+        error={ '请输入文字' }
+    />
+    <Button type={ 'submit' } className={ 'my-btn br1' }>提交</Button>
+</Form>
+ ```
+ 属性 | 说明 | 类型 | 默认值
+ ---- | ----- | ------ | ------
+ submit? | 提交表单 返回表单内input、select、textarea等原生html元素的json对象，例：{password: 123, textarea: 666} | (json:object) => void | 无
+ toast? | 提示器 | any | 无
+ 
+ ---------------------------------------------------------------------
