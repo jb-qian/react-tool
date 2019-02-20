@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 14:40:15
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 17:46:16
+ * @LastEditTime: 2019-02-20 09:12:55
  */
 import * as React from 'react';
 
@@ -21,7 +21,7 @@ export default class Form extends React.Component<Props> {
     constructor(props: Props){
         super(props)
     }
-    public submit = (e:any) => {
+    public submit = (e: any) => {
         e.preventDefault();
         let json = {};
         for (const key in e.target) {
