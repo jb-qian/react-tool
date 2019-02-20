@@ -1,5 +1,8 @@
 # react-tool 组件库
 
+<a href="https://www.npmjs.com/package/cat-react-tool"><img alt="npm version" src="http://img.shields.io/npm/v/cat-react-tool.svg?style=flat-square"></a>
+<a href="https://www.npmjs.com/package/cat-react-tool"><img alt="npm version" src="http://img.shields.io/npm/dm/cat-react-tool.svg?style=flat-square"></a>
+
 ## 工具列表
 
 * [Button 按钮](#button)
