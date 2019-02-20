@@ -10,6 +10,7 @@
 * [Select 选择器](#select)
 * [Input 输入框](#input)
 * [Form 表单](#form)
+* [Tool 工具](#tool)
 
 [Demo](https://jb-qian.github.io/react-tool/build/) (**组件不包括UI样式**)
 
@@ -215,3 +216,12 @@ interface Value {
  ---- | ----- | ------ | ------
  submit? | 提交表单 返回表单内input、select、textarea等原生html元素的json对象，例：{password: 123, textarea: 666} | (json:object) => void | 无
  toast? | 提示器 | any | 无
+  
+ ---------------------------------------------------------------------
+
+ ## <a name="tool">Tool 工具</a>
+ ```
+ Rem.set(750); 设置html font-size 以设计稿750为基准 1rem == 100px
+ Rem.get(750); 返回 以750为基准的像素值
+ ```
+ 
