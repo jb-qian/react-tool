@@ -174,6 +174,8 @@ interface Value {
  className? | 样式名 | string | 无
  style? | style | React.CSSProperties | 无
  placeholder? | 默认文案 | string | 无
+ onInput | oninput事件 | (e) => void | 无
+ onChange | onchange事件 | (e) => void | 无
  error? | 错误提示，配合form表单使用，如果设置此项，在form中表示必填 | string | 无
  
  ---------------------------------------------------------------------
