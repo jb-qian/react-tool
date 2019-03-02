@@ -7,9 +7,10 @@
 /coverage
 
 # production
-/public
-/config
-/scripts
+# /public
+# /config
+/scripts/publish.js
+/scripts/publish-to-npm.js
 
 # misc
 .DS_Store
