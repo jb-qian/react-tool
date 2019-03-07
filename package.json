@@ -56,8 +56,20 @@
     "commit": "validate-commit-msg"
   },
   "config": {
-    "ghooks": {
-      "commit-msg": "./node_modules/validate-commit-msg/index.js"
+    "validate-commit-msg": {
+      "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "build", "ci", "chore", "revert"],
+      "scope": {
+        "required": true,
+        "allowed": ["*"],
+        "validate": true,
+        "multiple": true
+      },
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "subject does not match subject pattern!",
+      "helpMessage": "",
+      "autoFix": false
     }
   },
   "devDependencies": {
