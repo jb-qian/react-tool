@@ -60,7 +60,7 @@
       "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "build", "ci", "chore", "revert"],
       "scope": {
         "required": true,
-        "allowed": ["*"],
+        "allowed": ["package.json"],
         "validate": true,
         "multiple": true
       },
