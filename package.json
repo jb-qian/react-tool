@@ -2,6 +2,8 @@
   "name": "cat-react-tool",
   "version": "0.0.1",
   "dependencies": {
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
     "autoprefixer": "7.1.6",
     "awesome-typescript-loader": "^5.2.1",
     "babel-jest": "20.0.3",
@@ -18,6 +20,7 @@
     "fork-ts-checker-webpack-plugin": "^0.2.8",
     "fs-extra": "^7.0.1",
     "html-webpack-plugin": "2.29.0",
+    "husky": "^1.3.1",
     "jest": "20.0.4",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
@@ -52,24 +55,11 @@
     "build": "node scripts/build.js",
     "build-publish": "node scripts/publish.js",
     "publish-to-npm": "npm run build-publish && npm run build && node scripts/publish-to-npm.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "commit": "validate-commit-msg"
+    "test": "node scripts/test.js --env=jsdom"
   },
-  "config": {
-    "validate-commit-msg": {
-      "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "build", "ci", "chore", "revert"],
-      "scope": {
-        "required": true,
-        "allowed": ["package.json"],
-        "validate": true,
-        "multiple": true
-      },
-      "warnOnFail": false,
-      "maxSubjectLength": 100,
-      "subjectPattern": ".+",
-      "subjectPatternErrorMsg": "subject does not match subject pattern!",
-      "helpMessage": "",
-      "autoFix": false
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "devDependencies": {
