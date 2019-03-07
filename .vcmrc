@@ -6,7 +6,7 @@
     "validate": true,
     "multiple": true
   },
-  "warnOnFail": true,
+  "warnOnFail": false,
   "maxSubjectLength": 100,
   "helpMessage": "",
   "autoFix": true

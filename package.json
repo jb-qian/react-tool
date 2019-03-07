@@ -52,7 +52,13 @@
     "build": "node scripts/build.js",
     "build-publish": "node scripts/publish.js",
     "publish-to-npm": "npm run build-publish && npm run build && node scripts/publish-to-npm.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "commit": "validate-commit-msg"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "./node_modules/validate-commit-msg/index.js"
+    }
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
