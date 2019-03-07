@@ -55,6 +55,11 @@
     "test": "node scripts/test.js --env=jsdom",
     "commit": "validate-commit-msg"
   },
+  "config": {
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    }
+  },
   "devDependencies": {
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",
