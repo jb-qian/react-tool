@@ -3,7 +3,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-18 14:59:31
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-20 09:24:47
+ * @LastEditTime: 2019-03-19 13:49:46
  */
 exports.__esModule = true;
 var PX = function (size) {
@@ -34,4 +34,6 @@ var Rem = /** @class */ (function () {
     };
     return Rem;
 }());
-exports.Rem = Rem;
+exports["default"] = {
+    Rem: Rem
+};

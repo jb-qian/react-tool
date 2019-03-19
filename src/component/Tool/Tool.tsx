@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-18 14:59:31
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-20 09:24:47
+ * @LastEditTime: 2019-03-19 13:49:46
  */
 
 const PX = (size: number = 750) => {
@@ -16,7 +16,7 @@ const PX = (size: number = 750) => {
     return { html, px };
 }
 
-export class Rem {
+class Rem {
     public static set = (size: number = 750) => {
         let { html, px } = PX(size);
         // 设置html字体大小
@@ -28,3 +28,7 @@ export class Rem {
         return px;
     }
 }
+
+export default {
+    Rem,
+};

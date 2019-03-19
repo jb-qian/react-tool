@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 12:12:45
+ * @LastEditTime: 2019-03-19 13:50:10
  */
 import * as React from 'react';
 
@@ -11,7 +11,9 @@ import './less/index.less';
 import * as styles from './less/css.less';
 import * as border from './less/border.less';
 
-import { Rem } from './component/Tool/Tool';
+import Tool from './component/Tool/Tool';
+
+const { Rem } = Tool;
 
 import Alert from './component/Alert/Alert';
 import Toast from './component/Toast/Toast';
