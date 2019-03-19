@@ -2,14 +2,13 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 14:40:15
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-20 09:12:55
+ * @LastEditTime: 2019-03-19 11:57:39
  */
 import * as React from 'react';
 
 /**
- * @param
- * submit 提交表单
- * toast 提示器
+ * @param submit 提交表单
+ * @param toast 提示器
  */
 
 interface Props{

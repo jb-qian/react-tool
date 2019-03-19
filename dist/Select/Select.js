@@ -17,14 +17,15 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-25 11:28:30
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 16:57:26
+ * @LastEditTime: 2019-03-19 11:45:36
  */
 var React = require("react");
 var ReactDOM = require("react-dom");
+var styles = require("../../less/select.less");
 var Element_1 = require("./Element");
 var createElement = function (props) {
     var div = document.createElement('div');
-    div.className = 'sq-select';
+    div.className = styles.select;
     document.body.appendChild(div);
     var element = React.createElement(Element_1["default"], Object.assign(props, {
         willUnmount: function () {
@@ -88,7 +89,7 @@ var Select = /** @class */ (function (_super) {
     Select.prototype.render = function () {
         var defaultValue = !(this.props.defaultValue || this.defaultValue).value && !this.state.value;
         var className = [this.props.className, defaultValue ? 'default' : ''].filter(function (item) { return item; });
-        return (React.createElement("div", { className: "" + className.join(' '), onClick: this.click },
+        return (React.createElement("div", { className: className.join(' '), onClick: this.click },
             React.createElement("select", { style: { display: 'none' }, name: this.props.name, "data-error": this.props.error, "data-value": this.state.value, onChange: this.onChange }),
             this.state.text));
     };

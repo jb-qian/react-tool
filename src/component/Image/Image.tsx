@@ -2,18 +2,19 @@
  * @Author: 宋乾
  * @Date: 2019-01-17 15:03:47
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-18 15:44:10
+ * @LastEditTime: 2019-03-19 11:53:36
  */
 import * as React from 'react';
 
+import * as styles from '../../less/image.less';
+
 /**
- * @param
- * src 图片地址
- * alt 图片简介
- * className 样式名称
- * defaultSrc 默认地址，图片未load成功或失败时显示
- * onSuccess load成功后调用
- * onError load失败后显示
+ * @param src 图片地址
+ * @param alt 图片简介
+ * @param className 样式名称
+ * @param defaultSrc 默认地址，图片未load成功或失败时显示
+ * @param onSuccess load成功后调用
+ * @param onError load失败后显示
  */
 interface Props {
     src: string;
@@ -82,10 +83,10 @@ export default class MyImage extends React.Component<Props, State> {
         }
     }
     public render (){
-        let className = ['sq-image-box', this.props.className].filter(item => item);
+        let className = [styles.imageBox, this.props.className].filter(item => item);
         return (
             <div ref={ e => this.image = e } className={ className.join(' ') }>
-                <img className={ `sq-image` } style={ this.state.style } src={ this.state.src } alt={ this.props.alt }/>
+                <img className={ styles.image } style={ this.state.style } src={ this.state.src } alt={ this.props.alt }/>
             </div>
         )
     }

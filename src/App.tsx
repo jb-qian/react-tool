@@ -2,11 +2,15 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 17:55:55
+ * @LastEditTime: 2019-03-19 12:12:45
  */
 import * as React from 'react';
 
 import './less/index.less';
+
+import * as styles from './less/css.less';
+import * as border from './less/border.less';
+
 import { Rem } from './component/Tool/Tool';
 
 import Alert from './component/Alert/Alert';
@@ -83,19 +87,20 @@ class App extends React.Component<Props, State> {
 		console.log(form);
 	}
 	public render() {
+		let btnStyles = [styles.btn, border.br1].join(' ');
 		return (
-			<div className="App" >
-				<Button className={ 'my-btn br1' } onClick={ this.toast } disabled={ true }>被禁止的按钮</Button>
-				<Button className={ 'my-btn br1' } onClick={ this.toast }>Toast</Button>
-				<Button className={ 'my-btn br1' } onClick={ this.alert }>Alert</Button>
-				<Image className={ 'my-image' } src={ 'https://img7.kcimg.cn/uploads/c7/4c/c74cd79689721906d4a5831031a5c8e4.jpg' } />
+			<div className={ styles.App } >
+				<Button className={ btnStyles } onClick={ this.toast } disabled={ true }>被禁止的按钮</Button>
+				<Button className={ btnStyles } onClick={ this.toast }>Toast</Button>
+				<Button className={ btnStyles } onClick={ this.alert }>Alert</Button>
+				<Image className={ styles.image } src={ 'https://img7.kcimg.cn/uploads/c7/4c/c74cd79689721906d4a5831031a5c8e4.jpg' } />
 				<Loading loading={ this.state.loading } />
 				<Form submit={ this.submit } toast={ Toast }>
 					<Input
 						type={ 'password' }
 						maxLength={ 10 }
 						name={ 'password' }
-						className={ 'my-input' }
+						className={ styles.input }
 						placeholder={ '请输入密码' }
 						error={ '请输入密码' }
 					/>
@@ -103,7 +108,7 @@ class App extends React.Component<Props, State> {
 						data={ this.state.select }
 						onConfirm={ this.onSelectChange }
 						name={ 'username' }
-						className={ 'my-select' }
+						className={ styles.select }
 						placeholder={ '请选择名称' }
 						error={ '请选择名称' }
 					/>
@@ -112,14 +117,14 @@ class App extends React.Component<Props, State> {
 						end={ 2019 }
 						onConfirm={ this.onSelectChange }
 						name={ 'time' }
-						className={ 'my-select' }
+						className={ styles.select }
 						placeholder={ '请选择时间' }
 						error={ '请选择时间' }
 					/>
 					<Cities
 						onConfirm={ this.onSelectChange }
 						name={ 'cities' }
-						className={ 'my-select' }
+						className={ styles.select }
 						placeholder={ '请选择城市' }
 						error={ '请选择城市' }
 					/>
@@ -127,11 +132,11 @@ class App extends React.Component<Props, State> {
 						type={ 'textarea' }
 						maxLength={ 100 }
 						name={ 'textarea' }
-						className={ 'my-textarea' }
+						className={ styles.textarea }
 						placeholder={ '请输入文字' }
 						error={ '请输入文字' }
 					/>
-					<Button type={ 'submit' } className={ 'my-btn br1' }>提交</Button>
+					<Button type={ 'submit' } className={ btnStyles }>提交</Button>
 				</Form>
 			</div>
 		);

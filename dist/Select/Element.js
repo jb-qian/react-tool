@@ -17,10 +17,12 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-25 11:50:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 15:37:48
+ * @LastEditTime: 2019-03-19 11:39:40
  */
 var React = require("react");
 var List_1 = require("./List");
+var styles = require("../../less/select.less");
+var border = require("../../less/border.less");
 var Element = /** @class */ (function (_super) {
     __extends(Element, _super);
     function Element(props) {
@@ -141,14 +143,14 @@ var Element = /** @class */ (function (_super) {
     };
     Element.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { className: "sq-select" },
-            React.createElement("div", { ref: function (e) { return _this.refSelectMask = e; }, className: "sq-select-mask" }),
-            React.createElement("div", { className: "sq-select-box" },
-                React.createElement("div", { className: 'sq-select-head brb' },
-                    React.createElement("div", { className: 'sq-select-head-btn', onClick: this.onClose }, "\u53D6\u6D88"),
-                    React.createElement("div", { className: 'sq-select-head-title' }, "\u8BF7\u9009\u62E9"),
-                    React.createElement("div", { className: 'sq-select-head-btn active', onClick: this.onConfirm }, "\u786E\u5B9A")),
-                React.createElement("div", { className: 'sq-list' }, this.listView().map(function (item, index) {
+        return (React.createElement("div", { className: styles.select },
+            React.createElement("div", { ref: function (e) { return _this.refSelectMask = e; }, className: styles.mask }),
+            React.createElement("div", { className: styles.box },
+                React.createElement("div", { className: [styles.head, border.brb].join(' ') },
+                    React.createElement("div", { className: styles.headBtn, onClick: this.onClose }, "\u53D6\u6D88"),
+                    React.createElement("div", { className: styles.headTitle }, "\u8BF7\u9009\u62E9"),
+                    React.createElement("div", { className: [styles.headBtn, styles.headBtnactive].join(' '), onClick: this.onConfirm }, "\u786E\u5B9A")),
+                React.createElement("div", { className: styles.list }, this.listView().map(function (item, index) {
                     return item;
                 })))));
     };

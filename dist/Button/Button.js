@@ -17,9 +17,10 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-10 11:08:12
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 17:28:27
+ * @LastEditTime: 2019-03-19 11:59:49
  */
 var React = require("react");
+var styles = require("../../less/button.less");
 var Button = /** @class */ (function (_super) {
     __extends(Button, _super);
     function Button(props) {
@@ -35,7 +36,7 @@ var Button = /** @class */ (function (_super) {
         return _this;
     }
     Button.prototype.render = function () {
-        return (React.createElement("button", { type: this.props.type, style: this.props.style, disabled: this.props.disabled, className: "sq-button " + (this.props.className || '') + " " + (this.props.disabled ? 'disabled' : ''), onClick: this.click }, this.props.children));
+        return (React.createElement("button", { type: this.props.type, style: this.props.style, disabled: this.props.disabled, className: [styles.button, this.props.className || '', this.props.disabled ? styles.disabled : ''].join(' '), onClick: this.click }, this.props.children));
     };
     return Button;
 }(React.Component));

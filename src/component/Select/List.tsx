@@ -2,25 +2,28 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-15 15:20:08
+ * @LastEditTime: 2019-03-19 11:37:14
  */
 import * as React from 'react';
 
 import { Value } from './Select';
+import * as styles from '../../less/select.less';
+import * as border from '../../less/border.less';
+
 /**
- * onChange 点击回调
- * data 转轮数据
- * hash 数据更新标识符
+ * @param onChange 点击回调
+ * @param data 转轮数据
+ * @param hash 数据更新标识符
  */
 interface ListProps {
     onChange: (item: Value) => void;
     data: Value[];
 }
 /**
- * currentMove 记录移动的距离
- * transition 移动时候的属性
- * data 数据
- * hash 数据更新标识符
+ * @param currentMove 记录移动的距离
+ * @param transition 移动时候的属性
+ * @param data 数据
+ * @param hash 数据更新标识符
  */
 interface State{
     currentMove: number;
@@ -87,7 +90,7 @@ export default class List extends React.Component<ListProps, State> {
                 style.color = '#999';
             }
             return (
-                <div style={ style } className={ `sq-select-list-item` } key={ `select-data-${index}` }>{ item.text }</div>
+                <div style={ style } className={ styles.listItem } key={ `select-data-${index}` }>{ item.text }</div>
             )
         }
         return '';
@@ -231,16 +234,16 @@ export default class List extends React.Component<ListProps, State> {
         let transformOrigin = `center center 89px`;
         let iPhone = this.iPhone ? { WebkitTransformOrigin: transformOrigin, transformOrigin } : {};
         return (
-            <div className={ `sq-select-list` }>
-                <div className={ `sq-select-list-items` } style={{ ...style, ...iPhone, transition: this.state.transition }}>
+            <div className={ styles.list }>
+                <div className={ styles.listItems } style={{ ...style, ...iPhone, transition: this.state.transition }}>
                     {
                         this.state.data.map((item, index) => {
                             return this.renderView(item, index);
                         })
                     }
                 </div>
-                <div className={ `sq-select-active brt brb` } />
-                <div ref={ e => this.refSelectList = e } className={ `sq-select-mask-content` } />
+                <div className={ [styles.active, border.brt, border.brb].join(' ') } />
+                <div ref={ e => this.refSelectList = e } className={ styles.maskContent } />
             </div>
         )
     }

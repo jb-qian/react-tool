@@ -1,7 +1,7 @@
 import * as React from 'react';
 /**
- * loading 状态
- * text 文字内容
+ * @param loading 状态
+ * @param text 文字内容
  */
 interface Props {
     text?: string;

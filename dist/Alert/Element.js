@@ -17,9 +17,11 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-10 13:44:28
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-01-18 15:40:45
+ * @LastEditTime: 2019-03-19 12:05:11
  */
 var React = require("react");
+var styles = require("../../less/alert.less");
+var border = require("../../less/border.less");
 var Element = /** @class */ (function (_super) {
     __extends(Element, _super);
     function Element(props) {
@@ -63,19 +65,19 @@ var Element = /** @class */ (function (_super) {
         var _this = this;
         setTimeout(function () {
             _this.setState({
-                className: 'active'
+                className: styles.active
             });
         }, 0);
     };
     Element.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { ref: function (e) { return _this.confirm = e; }, className: "sq-confirm " + this.state.className },
-            React.createElement("div", { className: "sq-content" },
-                this.props.title ? React.createElement("div", { className: "sq-title" }, this.props.title) : '',
-                this.props.subtitle ? React.createElement("div", { className: "sq-subtitle" }, this.props.subtitle) : ''),
-            React.createElement("div", { className: "sq-btns-content brt" },
-                !this.props.noDefault ? React.createElement("div", { className: "sq-btn brr", onClick: this["default"] }, "\u53D6\u6D88") : '',
-                !this.props.noPrimary ? React.createElement("div", { className: "sq-btn", onClick: this.primary }, "\u786E\u5B9A") : '')));
+        return (React.createElement("div", { ref: function (e) { return _this.confirm = e; }, className: [styles.confirm, this.state.className].join(' ') },
+            React.createElement("div", { className: styles.content },
+                this.props.title ? React.createElement("div", { className: styles.title }, this.props.title) : null,
+                this.props.subtitle ? React.createElement("div", { className: styles.subtitle }, this.props.subtitle) : null),
+            React.createElement("div", { className: [styles.btnsContent, border.brt].join(' ') },
+                !this.props.noDefault ? React.createElement("div", { className: [styles.btn, border.brr].join(' '), onClick: this["default"] }, "\u53D6\u6D88") : null,
+                !this.props.noPrimary ? React.createElement("div", { className: styles.btn, onClick: this.primary }, "\u786E\u5B9A") : null)));
     };
     return Element;
 }(React.Component));

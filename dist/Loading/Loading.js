@@ -17,9 +17,10 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-18 16:38:49
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 17:34:26
+ * @LastEditTime: 2019-03-19 11:44:46
  */
 var React = require("react");
+var styles = require("../../less/loading.less");
 var Loading = /** @class */ (function (_super) {
     __extends(Loading, _super);
     function Loading(props) {
@@ -27,12 +28,12 @@ var Loading = /** @class */ (function (_super) {
     }
     Loading.prototype.render = function () {
         if (this.props.loading) {
-            return (React.createElement("div", { className: "sq-loading" },
-                React.createElement("div", { className: "sq-loading-box" },
-                    React.createElement("div", { className: "sq-loading-icon" }, "icon"),
-                    React.createElement("div", { className: "sq-loading-text" }, this.props.text || '加载中'))));
+            return (React.createElement("div", { className: styles.loading },
+                React.createElement("div", { className: styles.box },
+                    React.createElement("div", { className: styles.icon }),
+                    React.createElement("div", { className: styles.text }, this.props.text || '加载中'))));
         }
-        return (React.createElement("div", { style: { display: 'none' } }, "loading"));
+        return (React.createElement("div", { style: { display: 'none' } }));
     };
     return Loading;
 }(React.Component));

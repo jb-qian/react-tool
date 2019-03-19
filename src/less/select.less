@@ -14,8 +14,8 @@
         opacity: 1;
     }
 }
-.sq-select,
-.sq-select-mask{
+.select,
+.mask{
     position: fixed;
     left: 0;
     right: 0;
@@ -24,11 +24,11 @@
     z-index: 9;
     touch-action: none;
 }
-.sq-select-mask{
+.mask{
     background-color: rgba(0, 0, 0, .4);
     animation: opacity .25s both;
 }
-.sq-select-mask-content{
+.maskContent{
     position: absolute;
     left: 0;
     right: 0;
@@ -36,7 +36,7 @@
     top: 0;
     z-index: 9;
 }
-.sq-select-box{
+.box{
     position: absolute;
     left: 0;
     right: 0;
@@ -48,19 +48,19 @@
     animation: active .25s both;
     display: flex;
     flex-direction: column;
-    .sq-list{
-        display: flex;
-        width: 100%;
-        flex: 1;
-    }
 }
-.sq-select-list{
+.boxList{
+    display: flex;
+    width: 100%;
+    flex: 1;
+}
+.list{
     flex: 1;
     display: flex;
     position: relative;
     background-color: #ddd;
 }
-.sq-select-list-items{
+.listItems{
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -72,7 +72,7 @@
     transform-style: preserve-3d;
     z-index: 1;
 }
-.sq-select-list-item{
+.listItem{
     padding: 5px;
     font-size: 14px;
     color: #333;
@@ -86,7 +86,7 @@
     opacity: 0;
     transition: all .1s;
 }
-.sq-select-active{
+.active{
     width: 100%;
     height: 40px;
     position: absolute;
@@ -99,33 +99,33 @@
         border-bottom: 1px solid rgba(0,0,0,.1);
     }
 }
-.sq-select-head{
+.head{
     display: flex;
     height: 40px;
     padding: 5px 10px;
     background-color: #eee;
-    .sq-select-head-btn{
-        height: 28px;
-        width: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
+}
+.headBtn{
+    height: 28px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 2px;
+    background-color: #fff;
+    &::after{
         border-radius: 2px;
-        background-color: #fff;
-        &::after{
-            border-radius: 2px;
-        }
-        &.active{
-            background-color: #f53;
-            color: #fff;
-        }
     }
-    .sq-select-head-title{
-        flex: 1;
-        font-size: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+}
+.headBtnactive{
+    background-color: #f53;
+    color: #fff;
+}
+.headTitle{
+    flex: 1;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

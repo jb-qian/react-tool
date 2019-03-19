@@ -1,8 +1,7 @@
 import * as React from 'react';
 /**
- * @param
- * submit 提交表单
- * toast 提示器
+ * @param submit 提交表单
+ * @param toast 提示器
  */
 interface Props {
     submit?: (json: object) => void;

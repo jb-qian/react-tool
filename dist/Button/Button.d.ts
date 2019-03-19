@@ -1,10 +1,10 @@
 import * as React from 'react';
 /**
- * disabled 是否禁止点击
- * onClick 点击触发
- * className 样式名
- * style style
- * type html的type
+ * @param disabled 是否禁止点击
+ * @param onClick 点击触发
+ * @param className 样式名
+ * @param style style
+ * @param type html的type
  */
 interface Props {
     disabled?: boolean;

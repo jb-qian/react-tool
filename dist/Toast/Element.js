@@ -17,9 +17,10 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-10 10:50:18
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-15 16:26:06
+ * @LastEditTime: 2019-03-19 11:06:49
  */
 var React = require("react");
+var styles = require("../../less/toast.less");
 var Element = /** @class */ (function (_super) {
     __extends(Element, _super);
     function Element(props) {
@@ -51,8 +52,8 @@ var Element = /** @class */ (function (_super) {
     };
     Element.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { ref: function (e) { return _this.toast = e; }, className: "sq-toast " + (this.state.show ? '' : 'hide') },
-            React.createElement("div", { className: "sq-text" }, this.props.text)));
+        return (React.createElement("div", { ref: function (e) { return _this.toast = e; }, className: [styles.toast, this.state.show ? '' : styles.hide].join(' ') },
+            React.createElement("div", { className: styles.text }, this.props.text)));
     };
     return Element;
 }(React.Component));

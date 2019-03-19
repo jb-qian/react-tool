@@ -1,7 +1,6 @@
 /**
- * @param
- * duration 时间
- * text 文字
+ * @param duration 停留时间
+ * @param text 文字
  */
 export interface Props {
     duration?: number;

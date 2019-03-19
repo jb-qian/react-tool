@@ -28,9 +28,11 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-15 15:20:08
+ * @LastEditTime: 2019-03-19 11:37:14
  */
 var React = require("react");
+var styles = require("../../less/select.less");
+var border = require("../../less/border.less");
 var List = /** @class */ (function (_super) {
     __extends(List, _super);
     function List(props) {
@@ -72,7 +74,7 @@ var List = /** @class */ (function (_super) {
                 if (style.opacity !== 1) {
                     style.color = '#999';
                 }
-                return (React.createElement("div", { style: style, className: "sq-select-list-item", key: "select-data-" + index }, item.text));
+                return (React.createElement("div", { style: style, className: styles.listItem, key: "select-data-" + index }, item.text));
             }
             return '';
         };
@@ -229,12 +231,12 @@ var List = /** @class */ (function (_super) {
         var style = { WebkitTransform: transform, transform: transform };
         var transformOrigin = "center center 89px";
         var iPhone = this.iPhone ? { WebkitTransformOrigin: transformOrigin, transformOrigin: transformOrigin } : {};
-        return (React.createElement("div", { className: "sq-select-list" },
-            React.createElement("div", { className: "sq-select-list-items", style: __assign({}, style, iPhone, { transition: this.state.transition }) }, this.state.data.map(function (item, index) {
+        return (React.createElement("div", { className: styles.list },
+            React.createElement("div", { className: styles.listItems, style: __assign({}, style, iPhone, { transition: this.state.transition }) }, this.state.data.map(function (item, index) {
                 return _this.renderView(item, index);
             })),
-            React.createElement("div", { className: "sq-select-active brt brb" }),
-            React.createElement("div", { ref: function (e) { return _this.refSelectList = e; }, className: "sq-select-mask-content" })));
+            React.createElement("div", { className: [styles.active, border.brt, border.brb].join(' ') }),
+            React.createElement("div", { ref: function (e) { return _this.refSelectList = e; }, className: styles.maskContent })));
     };
     return List;
 }(React.Component));

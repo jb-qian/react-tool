@@ -2,12 +2,14 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:50:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 15:37:48
+ * @LastEditTime: 2019-03-19 11:39:40
  */
 import * as React from 'react';
 
 import { Props, Value } from './Select';
 import List from './List';
+import * as styles from '../../less/select.less';
+import * as border from '../../less/border.less';
 
 interface SelectProps extends Props {
     willUnmount: () => void;
@@ -142,15 +144,15 @@ export default class Element extends React.Component<SelectProps, State> {
     }
     public render(){
         return (
-            <div className={ `sq-select` }>
-                <div ref={ e => this.refSelectMask = e } className={ `sq-select-mask` } />
-                <div className={ `sq-select-box` }>
-                    <div className={ 'sq-select-head brb' }>
-                        <div className={ 'sq-select-head-btn' } onClick={ this.onClose }>取消</div>
-                        <div className={ 'sq-select-head-title' }>请选择</div>
-                        <div className={ 'sq-select-head-btn active' } onClick={ this.onConfirm }>确定</div>
+            <div className={ styles.select }>
+                <div ref={ e => this.refSelectMask = e } className={ styles.mask } />
+                <div className={ styles.box }>
+                    <div className={ [styles.head, border.brb].join(' ') }>
+                        <div className={ styles.headBtn } onClick={ this.onClose }>取消</div>
+                        <div className={ styles.headTitle }>请选择</div>
+                        <div className={ [styles.headBtn, styles.headBtnactive].join(' ') } onClick={ this.onConfirm }>确定</div>
                     </div>
-                    <div className={ 'sq-list' }>
+                    <div className={ styles.list }>
                         {
                             this.listView().map((item, index) => {
                                 return item;

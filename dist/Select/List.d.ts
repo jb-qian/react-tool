@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { Value } from './Select';
 /**
- * onChange 点击回调
- * data 转轮数据
- * hash 数据更新标识符
+ * @param onChange 点击回调
+ * @param data 转轮数据
+ * @param hash 数据更新标识符
  */
 interface ListProps {
     onChange: (item: Value) => void;
     data: Value[];
 }
 /**
- * currentMove 记录移动的距离
- * transition 移动时候的属性
- * data 数据
- * hash 数据更新标识符
+ * @param currentMove 记录移动的距离
+ * @param transition 移动时候的属性
+ * @param data 数据
+ * @param hash 数据更新标识符
  */
 interface State {
     currentMove: number;

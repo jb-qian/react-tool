@@ -2,16 +2,17 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 11:08:12
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 17:28:27
+ * @LastEditTime: 2019-03-19 11:59:49
  */
 import * as React from 'react';
+import * as styles from '../../less/button.less';
 
 /**
- * disabled 是否禁止点击
- * onClick 点击触发
- * className 样式名
- * style style
- * type html的type
+ * @param disabled 是否禁止点击
+ * @param onClick 点击触发
+ * @param className 样式名
+ * @param style style
+ * @param type html的type
  */
 
 interface Props{
@@ -41,7 +42,7 @@ export default class Button extends React.Component<Props> {
                 type={ this.props.type }
                 style={ this.props.style }
                 disabled={ this.props.disabled }
-                className={ `sq-button ${this.props.className || ''} ${this.props.disabled ? 'disabled' : ''}` }
+                className={ [styles.button, this.props.className || '', this.props.disabled ? styles.disabled : ''].join(' ') }
                 onClick={ this.click }
             >
                 {

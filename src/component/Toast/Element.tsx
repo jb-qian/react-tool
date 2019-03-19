@@ -2,11 +2,12 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 10:50:18
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-15 16:26:06
+ * @LastEditTime: 2019-03-19 11:06:49
  */
 import * as React from 'react';
 
 import { Props } from './Toast';
+import * as styles from '../../less/toast.less';
 
 interface ToastProps extends Props {
     willUnmount: () => void;
@@ -48,8 +49,8 @@ export default class Element extends React.Component<ToastProps, State> {
     }
     public render (){
         return (
-            <div ref={ e => this.toast = e } className={ `sq-toast ${this.state.show ? '' : 'hide'}` }>
-                <div className="sq-text">{ this.props.text }</div>
+            <div ref={ e => this.toast = e } className={ [styles.toast, this.state.show ? '' : styles.hide].join(' ') }>
+                <div className={ styles.text }>{ this.props.text }</div>
             </div>
         )
     }

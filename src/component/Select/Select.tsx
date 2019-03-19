@@ -2,10 +2,12 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:28:30
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-02-19 16:57:26
+ * @LastEditTime: 2019-03-19 11:45:36
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+
+import * as styles from '../../less/select.less';
 
 import Element from './Element';
 
@@ -22,16 +24,16 @@ export interface Props {
 }
 
 /**
- * data 选择器数据
- * name select的name属性
- * onChange 选择器改变后触发
- * onConfirm 确认按钮触发
- * placeholder 未选择默认文案
- * defaultValue 默认选项
- * className 样式名称
- * length 选择器数量
- * type 选择器类型，可选 'date'
- * error 错误提示，配合form表单使用，如果设置此项，在form中表示必填
+ * @param data 选择器数据
+ * @param name select的name属性
+ * @param onChange 选择器改变后触发
+ * @param onConfirm 确认按钮触发
+ * @param placeholder 未选择默认文案
+ * @param defaultValue 默认选项
+ * @param className 样式名称
+ * @param length 选择器数量
+ * @param type 选择器类型，可选 'date'
+ * @param error 错误提示，配合form表单使用，如果设置此项，在form中表示必填
  */
 
 export interface SelectProps {
@@ -54,7 +56,7 @@ interface SelectState {
 const createElement = (props: Props) => {
     const div = document.createElement('div');
 
-    div.className = 'sq-select';
+    div.className = styles.select;
     document.body.appendChild(div);
 
     const element = React.createElement(Element, Object.assign(props, {
@@ -120,7 +122,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         let defaultValue = !(this.props.defaultValue || this.defaultValue).value && !this.state.value;
         let className = [this.props.className, defaultValue ? 'default' : ''].filter(item => item);
         return (
-            <div className={ `${className.join(' ')}` } onClick={ this.click }>
+            <div className={ className.join(' ') } onClick={ this.click }>
                 <select style={{ display: 'none' }} name={ this.props.name } data-error={ this.props.error } data-value={ this.state.value } onChange={ this.onChange } />
                 { this.state.text }
             </div>

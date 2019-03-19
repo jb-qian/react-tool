@@ -11,16 +11,16 @@ export interface Props {
     type: string;
 }
 /**
- * data 选择器数据
- * name select的name属性
- * onChange 选择器改变后触发
- * onConfirm 确认按钮触发
- * placeholder 未选择默认文案
- * defaultValue 默认选项
- * className 样式名称
- * length 选择器数量
- * type 选择器类型，可选 'date'
- * error 错误提示，配合form表单使用，如果设置此项，在form中表示必填
+ * @param data 选择器数据
+ * @param name select的name属性
+ * @param onChange 选择器改变后触发
+ * @param onConfirm 确认按钮触发
+ * @param placeholder 未选择默认文案
+ * @param defaultValue 默认选项
+ * @param className 样式名称
+ * @param length 选择器数量
+ * @param type 选择器类型，可选 'date'
+ * @param error 错误提示，配合form表单使用，如果设置此项，在form中表示必填
  */
 export interface SelectProps {
     data: Value[];
