@@ -17,11 +17,11 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-25 11:28:30
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:45:36
+ * @LastEditTime: 2019-03-20 09:49:16
  */
 var React = require("react");
 var ReactDOM = require("react-dom");
-var styles = require("../../less/select.less");
+var styles = require("../../less/select.module.less");
 var Element_1 = require("./Element");
 var createElement = function (props) {
     var div = document.createElement('div');

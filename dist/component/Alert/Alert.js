@@ -4,11 +4,11 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-10 13:49:29
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 16:02:37
+ * @LastEditTime: 2019-03-20 09:47:54
  */
 var React = require("react");
 var ReactDOM = require("react-dom");
-var styles = require("../../less/alert.less");
+var styles = require("../../less/alert.module.less");
 var Element_1 = require("./Element");
 var App = function (props) {
     // 创建一个元素

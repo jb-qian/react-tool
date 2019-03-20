@@ -17,10 +17,10 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-17 15:03:47
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:53:36
+ * @LastEditTime: 2019-03-20 09:48:49
  */
 var React = require("react");
-var styles = require("../../less/image.less");
+var styles = require("../../less/image.module.less");
 var MyImage = /** @class */ (function (_super) {
     __extends(MyImage, _super);
     function MyImage(props) {

@@ -17,10 +17,10 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-10 11:08:12
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:59:49
+ * @LastEditTime: 2019-03-20 09:48:46
  */
 var React = require("react");
-var styles = require("../../less/button.less");
+var styles = require("../../less/button.module.less");
 var Button = /** @class */ (function (_super) {
     __extends(Button, _super);
     function Button(props) {

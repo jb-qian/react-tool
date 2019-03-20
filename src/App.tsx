@@ -2,14 +2,14 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 13:50:10
+ * @LastEditTime: 2019-03-20 09:51:53
  */
 import * as React from 'react';
 
 import './less/index.less';
 
-import * as styles from './less/css.less';
-import * as border from './less/border.less';
+import * as styles from './less/css.module.less';
+import * as border from './less/border.module.less';
 
 import Tool from './component/Tool/Tool';
 

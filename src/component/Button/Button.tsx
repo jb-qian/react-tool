@@ -2,10 +2,10 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 11:08:12
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:59:49
+ * @LastEditTime: 2019-03-20 09:48:46
  */
 import * as React from 'react';
-import * as styles from '../../less/button.less';
+import * as styles from '../../less/button.module.less';
 
 /**
  * @param disabled 是否禁止点击

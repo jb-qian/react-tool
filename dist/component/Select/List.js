@@ -28,11 +28,11 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:37:14
+ * @LastEditTime: 2019-03-20 09:49:09
  */
 var React = require("react");
-var styles = require("../../less/select.less");
-var border = require("../../less/border.less");
+var styles = require("../../less/select.module.less");
+var border = require("../../less/border.module.less");
 var List = /** @class */ (function (_super) {
     __extends(List, _super);
     function List(props) {

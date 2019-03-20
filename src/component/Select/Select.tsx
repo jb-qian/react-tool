@@ -2,12 +2,12 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:28:30
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:45:36
+ * @LastEditTime: 2019-03-20 09:49:16
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import * as styles from '../../less/select.less';
+import * as styles from '../../less/select.module.less';
 
 import Element from './Element';
 

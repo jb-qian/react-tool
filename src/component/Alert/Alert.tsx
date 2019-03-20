@@ -2,11 +2,11 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 13:49:29
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 16:02:37
+ * @LastEditTime: 2019-03-20 09:47:54
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as styles from '../../less/alert.less';
+import * as styles from '../../less/alert.module.less';
 
 import Element from './Element';
 

@@ -17,10 +17,10 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-10 10:50:18
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:06:49
+ * @LastEditTime: 2019-03-20 09:49:21
  */
 var React = require("react");
-var styles = require("../../less/toast.less");
+var styles = require("../../less/toast.module.less");
 var Element = /** @class */ (function (_super) {
     __extends(Element, _super);
     function Element(props) {

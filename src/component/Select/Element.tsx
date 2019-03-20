@@ -2,14 +2,14 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:50:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:39:40
+ * @LastEditTime: 2019-03-20 09:49:01
  */
 import * as React from 'react';
 
 import { Props, Value } from './Select';
 import List from './List';
-import * as styles from '../../less/select.less';
-import * as border from '../../less/border.less';
+import * as styles from '../../less/select.module.less';
+import * as border from '../../less/border.module.less';
 
 interface SelectProps extends Props {
     willUnmount: () => void;

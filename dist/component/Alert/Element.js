@@ -17,11 +17,11 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-10 13:44:28
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 12:05:11
+ * @LastEditTime: 2019-03-20 09:48:40
  */
 var React = require("react");
-var styles = require("../../less/alert.less");
-var border = require("../../less/border.less");
+var styles = require("../../less/alert.module.less");
+var border = require("../../less/border.module.less");
 var Element = /** @class */ (function (_super) {
     __extends(Element, _super);
     function Element(props) {

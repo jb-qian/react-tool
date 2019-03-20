@@ -2,11 +2,11 @@
  * @Author: 宋乾
  * @Date: 2019-01-17 15:03:47
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:53:36
+ * @LastEditTime: 2019-03-20 09:48:49
  */
 import * as React from 'react';
 
-import * as styles from '../../less/image.less';
+import * as styles from '../../less/image.module.less';
 
 /**
  * @param src 图片地址

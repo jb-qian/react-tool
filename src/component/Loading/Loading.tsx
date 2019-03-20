@@ -2,10 +2,10 @@
  * @Author: 宋乾
  * @Date: 2019-01-18 16:38:49
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:44:46
+ * @LastEditTime: 2019-03-20 09:48:55
  */
 import * as React from 'react';
-import * as styles from '../../less/loading.less';
+import * as styles from '../../less/loading.module.less';
 
 /**
  * @param loading 状态

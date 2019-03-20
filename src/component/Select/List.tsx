@@ -2,13 +2,13 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:37:14
+ * @LastEditTime: 2019-03-20 09:49:09
  */
 import * as React from 'react';
 
 import { Value } from './Select';
-import * as styles from '../../less/select.less';
-import * as border from '../../less/border.less';
+import * as styles from '../../less/select.module.less';
+import * as border from '../../less/border.module.less';
 
 /**
  * @param onChange 点击回调

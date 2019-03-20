@@ -2,13 +2,13 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 13:44:28
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 12:05:11
+ * @LastEditTime: 2019-03-20 09:48:40
  */
 import * as React from 'react';
 
 import { Props } from './Alert';
-import * as styles from '../../less/alert.less';
-import * as border from '../../less/border.less';
+import * as styles from '../../less/alert.module.less';
+import * as border from '../../less/border.module.less';
 
 interface AlertProps extends Props {
     willUnmount: () => void;

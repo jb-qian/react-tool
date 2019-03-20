@@ -17,10 +17,10 @@ exports.__esModule = true;
  * @Author: 宋乾
  * @Date: 2019-01-18 16:38:49
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:44:46
+ * @LastEditTime: 2019-03-20 09:48:55
  */
 var React = require("react");
-var styles = require("../../less/loading.less");
+var styles = require("../../less/loading.module.less");
 var Loading = /** @class */ (function (_super) {
     __extends(Loading, _super);
     function Loading(props) {
