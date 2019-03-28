@@ -1,0 +1,46 @@
+@keyframes loadingPng {
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(1turn);
+    }
+}
+.loading{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.box{
+    width: 90px;
+    height: 90px;
+    color: #fff;
+    background-color: rgba(0,0,0, .6);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-top: -80px;
+}
+.icon{
+    width: 30px;
+    height: 30px;
+    animation: loadingPng 1s steps(12) infinite;
+    background: url('../images/loading.png') center no-repeat;
+    background-size: contain;
+    font-size: 0;
+}
+.text{
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, .9);
+}
