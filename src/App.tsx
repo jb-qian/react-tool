@@ -44,6 +44,7 @@ interface Props {
 interface State {
 	loading: boolean;
 	select: Value[];
+	rules: {};
 }
 
 class App extends React.Component<Props, State> {
@@ -60,7 +61,14 @@ class App extends React.Component<Props, State> {
 			},{
 				value: 2,
 				text: '卡家好车',
-			}]
+			}],
+			rules: {
+				password: (value) => {
+					if (value.length !== 6) {
+						return '请输入6位密码';
+					}
+				}
+			}
 		}
 	}
 	public toast = () => {
@@ -100,7 +108,7 @@ class App extends React.Component<Props, State> {
 				<Button className={ btnStyles } onClick={ this.alert }>Alert</Button>
 				<Image className={ styles.image } src={ 'https://img7.kcimg.cn/uploads/c7/4c/c74cd79689721906d4a5831031a5c8e4.jpg' } />
 				<Loading loading={ this.state.loading } />
-				<Form submit={ this.submit } toast={ Toast }>
+				<Form submit={ this.submit } toast={ Toast } rules={ this.state.rules }>
 					<Input
 						type={ 'password' }
 						maxLength={ 10 }

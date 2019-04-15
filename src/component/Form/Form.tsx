@@ -2,18 +2,22 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 14:40:15
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-04-15 22:52:10
+ * @LastEditTime: 2019-04-15 23:28:32
  */
 import * as React from 'react';
 
 /**
  * @param submit 提交表单
  * @param toast 提示器
+ * @param rules 验证规则
  */
-
+interface Rules {
+    [key: string]: (value: string) => string | undefined;
+}
 interface Props{
     submit?: (json:object) => void;
     toast?: any;
+    rules?: Rules;
 }
 
 export default class Form extends React.Component<Props> {
@@ -33,16 +37,28 @@ export default class Form extends React.Component<Props> {
                     }else{
                         json[target.name] = target.value;
                     }
+                    let text = target.getAttribute('data-error');
+                    let rules = this.props.rules || {};
+                    let rule = rules[target.name];
+                    // 自定义校验
+                    if (rule) {
+                        let text = rule(json[target.name]);
+                        if (text){
+                            return this.props.toast && this.props.toast({
+                                text,
+                            })
+                        }
+                    }
                     // 手机号验证
                     if (target.getAttribute('data-type') === 'mobile') {
                         let mobile = json[target.name];
-                        if (!/^1\d{10}$/.test(mobile)) {
+                        let re = /^1\d{10}$/;
+                        if (!re.test(mobile) && !text) {
                             return this.props.toast && this.props.toast({
                                 text: `请输入${mobile ? '正确' : ''}手机号`,
                             })
                         }
                     }
-                    let text = target.getAttribute('data-error');
                     if (text && !json[target.name]) {
                         return this.props.toast && this.props.toast({
                             text,
