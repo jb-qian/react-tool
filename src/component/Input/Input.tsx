@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 15:46:24
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:51:29
+ * @LastEditTime: 2019-04-15 22:50:42
  */
 import * as React from 'react';
 
@@ -29,13 +29,21 @@ interface Props {
 }
 
 interface InputProps extends Props {
-    onInput?: ((event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined;
-    onChange?: ((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined;
+    onInput?: ((value: string) => void) | undefined;
+    onChange?: ((value: string) => void) | undefined;
 }
 
 export default class Input extends React.Component<InputProps> {
     constructor(props: InputProps) {
         super(props)
+    }
+    public onChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        let value = event.currentTarget.value;
+        this.props.onChange && this.props.onChange(value);
+    }
+    public onInput = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        let value = event.currentTarget.value;
+        this.props.onInput && this.props.onInput(value);
     }
     public render() {
         let type = {
@@ -44,22 +52,21 @@ export default class Input extends React.Component<InputProps> {
             name: this.props.name,
             className: this.props.className,
             style: this.props.style,
-            onInput: this.props.onInput,
-            onChange: this.props.onChange,
+            onInput: this.onInput,
+            onChange: this.onChange,
             placeholder: this.props.placeholder,
             'data-error': this.props.error,
         }
-        if (this.props.type === 'textarea') {
-            return (
-                <textarea
-                    {...type}
-                />
-            )
+        if (this.props.type === 'mobile') {
+            type.type = 'tel';
+            type.maxLength = 11;
+            type.placeholder = type.placeholder || '请输入手机号';
+            type['data-type'] = 'mobile';
         }
         return (
-            <input
-                {...type}
-            />
+            this.props.type === 'textarea' ?
+            <textarea {...type} /> :
+            <input {...type} />
         )
     }
 }

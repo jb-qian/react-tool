@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 14:40:15
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:57:39
+ * @LastEditTime: 2019-04-15 22:52:10
  */
 import * as React from 'react';
 
@@ -32,6 +32,15 @@ export default class Form extends React.Component<Props> {
                         json[target.name] = target.getAttribute('data-value');
                     }else{
                         json[target.name] = target.value;
+                    }
+                    // 手机号验证
+                    if (target.getAttribute('data-type') === 'mobile') {
+                        let mobile = json[target.name];
+                        if (!/^1\d{10}$/.test(mobile)) {
+                            return this.props.toast && this.props.toast({
+                                text: `请输入${mobile ? '正确' : ''}手机号`,
+                            })
+                        }
                     }
                     let text = target.getAttribute('data-error');
                     if (text && !json[target.name]) {

@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-28 00:14:31
+ * @LastEditTime: 2019-04-15 22:35:57
  */
 import * as React from 'react';
 
@@ -88,6 +88,9 @@ class App extends React.Component<Props, State> {
 	public submit = (form:object) => {
 		console.log(form);
 	}
+	public input = (key, value) => {
+		console.log(key, value);
+	}
 	public render() {
 		let btnStyles = [styles.btn, border.br1].join(' ');
 		return (
@@ -103,8 +106,14 @@ class App extends React.Component<Props, State> {
 						maxLength={ 10 }
 						name={ 'password' }
 						className={ styles.input }
+						onInput={ (value: string) => this.input('password', value) }
 						placeholder={ '请输入密码' }
 						error={ '请输入密码' }
+					/>
+					<Input
+						type={ 'mobile' }
+						name={ 'mobile' }
+						className={ styles.input }
 					/>
 					<Select
 						data={ this.state.select }
