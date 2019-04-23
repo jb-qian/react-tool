@@ -1,159 +1,138 @@
-"use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-exports.__esModule = true;
 /*
  * @Author: 宋乾
  * @Date: 2019-01-25 11:50:38
  * @LastEditors: 宋乾
  * @LastEditTime: 2019-03-20 09:49:01
  */
-var React = require("react");
-var List_1 = require("./List");
-var styles = require("../../less/select.module.less");
-var border = require("../../less/border.module.less");
-var Element = /** @class */ (function (_super) {
-    __extends(Element, _super);
-    function Element(props) {
-        var _this = _super.call(this, props) || this;
-        _this.reflist = {};
-        _this.initNumber = function (num) {
+import * as React from 'react';
+import List from './List';
+import * as styles from '../../less/select.module.less.js';
+import * as border from '../../less/border.module.less.js';
+export default class Element extends React.Component {
+    constructor(props) {
+        super(props);
+        this.reflist = {};
+        this.initNumber = (num) => {
             if (num < 10) {
-                num = "0" + num;
+                num = `0${num}`;
             }
             return num;
         };
-        _this.getMonth = function () {
-            var arr = [];
-            for (var i = 1; i <= 12; i++) {
+        this.getMonth = () => {
+            let arr = [];
+            for (let i = 1; i <= 12; i++) {
                 arr.push({
-                    value: _this.initNumber(i),
-                    text: "" + _this.initNumber(i)
+                    value: this.initNumber(i),
+                    text: `${this.initNumber(i)}`,
                 });
             }
             return arr;
         };
-        _this.getDate = function (year, month) {
+        this.getDate = (year, month) => {
             year = Number(year);
             month = Number(month);
-            var arr = [];
-            var max = [1, 3, 5, 7, 8, 10, 12].indexOf(month) !== -1 ? 31 : 30;
+            let arr = [];
+            let max = [1, 3, 5, 7, 8, 10, 12].indexOf(month) !== -1 ? 31 : 30;
             if (month === 2) {
                 max = (year % 400 === 0 || year % 4 === 0 && year % 100 !== 0) ? 29 : 28;
             }
-            for (var i = 1; i <= max; i++) {
+            for (let i = 1; i <= max; i++) {
                 arr.push({
-                    value: _this.initNumber(i),
-                    text: "" + _this.initNumber(i)
+                    value: this.initNumber(i),
+                    text: `${this.initNumber(i)}`,
                 });
             }
             return arr;
         };
-        _this.onClose = function () {
-            _this.props.willUnmount();
+        this.onClose = () => {
+            this.props.willUnmount();
         };
-        _this.onConfirm = function () {
-            _this.props.setValue(_this.state.value, true);
-            _this.props.willUnmount();
+        this.onConfirm = () => {
+            this.props.setValue(this.state.value, true);
+            this.props.willUnmount();
         };
-        _this.onChange = function (index, item) {
-            if (item === void 0) { item = { value: '', text: '' }; }
-            _this.setState(function (prev) {
-                var value = prev.value.slice();
+        this.onChange = (index, item = { value: '', text: '' }) => {
+            this.setState(prev => {
+                let value = [...prev.value];
                 value[index] = item;
                 return {
-                    value: value
+                    value,
                 };
             });
-            clearTimeout(_this.timer);
-            _this.timer = setTimeout(function () {
-                _this.props.setValue(_this.state.value);
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                this.props.setValue(this.state.value);
             }, 10);
-            _this.setState(function (prev) {
-                var data = prev.data.slice();
+            this.setState(prev => {
+                let data = [...prev.data];
                 data[index + 1] = item.children || [];
                 return {
-                    data: data
+                    data,
                 };
             });
             // 时间单独处理
-            if (_this.props.type === 'date') {
-                _this.setState(function (prev) {
-                    var data = prev.data.slice();
-                    data[1] = _this.getMonth();
-                    var year = (_this.state.value[0] || { value: 1970 }).value;
-                    var month = (_this.state.value[1] || { value: 1 }).value;
-                    data[2] = _this.getDate(year, month);
+            if (this.props.type === 'date') {
+                this.setState(prev => {
+                    let data = [...prev.data];
+                    data[1] = this.getMonth();
+                    let year = (this.state.value[0] || { value: 1970 }).value;
+                    let month = (this.state.value[1] || { value: 1 }).value;
+                    data[2] = this.getDate(year, month);
                     return {
-                        data: data
+                        data,
                     };
                 });
             }
         };
-        _this.touch = function (type) {
-            var mask = _this.refSelectMask;
+        this.touch = (type) => {
+            let mask = this.refSelectMask;
             if (mask) {
-                mask[type]('touchstart', _this.maskTouchStart);
-                mask[type]('touchend', _this.maskTouchEnd);
+                mask[type]('touchstart', this.maskTouchStart);
+                mask[type]('touchend', this.maskTouchEnd);
             }
         };
-        _this.maskTouchStart = function (e) {
+        this.maskTouchStart = (e) => {
             e.preventDefault();
             e.stopPropagation();
         };
-        _this.maskTouchEnd = function (e) {
+        this.maskTouchEnd = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            _this.onClose();
+            this.onClose();
         };
-        _this.state = {
+        this.state = {
             active: false,
             data: [
-                _this.props.data
+                this.props.data
             ],
-            value: []
+            value: [],
         };
-        return _this;
     }
-    Element.prototype.componentDidMount = function () {
+    componentDidMount() {
         this.touch('addEventListener');
-    };
-    Element.prototype.componentWillUnmount = function () {
+    }
+    componentWillUnmount() {
         this.touch('removeEventListener');
-    };
-    Element.prototype.listView = function () {
-        var arr = [];
-        var length = Number(this.props.length);
-        for (var i = 0; i < length; i++) {
-            var data = this.state.data[i] || [];
-            arr.push(React.createElement(List_1["default"], { key: "sq-list-" + i, onChange: this.onChange.bind(this, i), data: data }));
+    }
+    listView() {
+        let arr = [];
+        let length = Number(this.props.length);
+        for (let i = 0; i < length; i++) {
+            let data = this.state.data[i] || [];
+            arr.push(React.createElement(List, { key: `sq-list-${i}`, onChange: this.onChange.bind(this, i), data: data }));
         }
         return arr;
-    };
-    Element.prototype.render = function () {
-        var _this = this;
+    }
+    render() {
         return (React.createElement("div", { className: styles.select },
-            React.createElement("div", { ref: function (e) { return _this.refSelectMask = e; }, className: styles.mask }),
+            React.createElement("div", { ref: e => this.refSelectMask = e, className: styles.mask }),
             React.createElement("div", { className: styles.box },
                 React.createElement("div", { className: [styles.head, border.brb].join(' ') },
                     React.createElement("div", { className: styles.headBtn, onClick: this.onClose }, "\u53D6\u6D88"),
                     React.createElement("div", { className: styles.headTitle }, "\u8BF7\u9009\u62E9"),
                     React.createElement("div", { className: [styles.headBtn, styles.headBtnactive].join(' '), onClick: this.onConfirm }, "\u786E\u5B9A")),
-                React.createElement("div", { className: styles.list }, this.listView().map(function (item, index) {
+                React.createElement("div", { className: styles.list }, this.listView().map((item, index) => {
                     return item;
                 })))));
-    };
-    return Element;
-}(React.Component));
-exports["default"] = Element;
+    }
+}

@@ -25,7 +25,7 @@ export default class Element extends React.Component<SelectProps, State> {
     maskTouchEnd: (e: any) => void;
     componentDidMount(): void;
     componentWillUnmount(): void;
-    listView(): any[];
+    listView(): JSX.Element[];
     render(): JSX.Element;
 }
 export {};

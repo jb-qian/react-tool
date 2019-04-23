@@ -20,11 +20,13 @@ interface Props {
     [key: string]: any;
 }
 interface InputProps extends Props {
-    onInput?: ((event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined;
-    onChange?: ((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined;
+    onInput?: ((value: string) => void) | undefined;
+    onChange?: ((value: string) => void) | undefined;
 }
 export default class Input extends React.Component<InputProps> {
     constructor(props: InputProps);
+    onChange: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onInput: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     render(): JSX.Element;
 }
 export {};

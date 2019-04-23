@@ -1,34 +1,32 @@
-"use strict";
-exports.__esModule = true;
 /*
  * @Author: 宋乾
  * @Date: 2019-01-10 13:49:29
  * @LastEditors: 宋乾
  * @LastEditTime: 2019-03-27 23:00:58
  */
-var React = require("react");
-var ReactDOM = require("react-dom");
-var styles = require("../../less/alert.module.less");
-var Element_1 = require("./Element");
-var App = function (props) {
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as styles from '../../less/alert.module.less.js';
+import Element from './Element';
+const App = (props) => {
     // 创建一个元素
-    var div = document.createElement('div');
+    const div = document.createElement('div');
     // 添加专属样式
     div.className = styles.alert;
     // 添加到页面内
     document.body.appendChild(div);
     // 绑定事件
-    div.addEventListener('touchmove', function (e) {
+    div.addEventListener('touchmove', e => {
         e.preventDefault();
         e.stopPropagation();
     });
     // 加入到dom中
-    var element = React.createElement(Element_1["default"], Object.assign(props, {
+    const element = React.createElement(Element, Object.assign(props, {
         // 结束后销毁方法
-        willUnmount: function () {
+        willUnmount: () => {
             ReactDOM.unmountComponentAtNode(div);
             document.body.removeChild(div);
-            div.removeEventListener('touchmove', function (e) {
+            div.removeEventListener('touchmove', e => {
                 e.preventDefault();
                 e.stopPropagation();
             });
@@ -36,4 +34,4 @@ var App = function (props) {
     }));
     ReactDOM.render(element, div);
 };
-exports["default"] = App;
+export default App;

@@ -1,21 +1,46 @@
+const fs = require('fs');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssModuleToString = require('./loader/CssModuleToString/index');
+
+function getFiles(file) {
+    let files = fs.readdirSync(file);
+    let array = [];
+    files.forEach((item) => {
+        let nextFile = `${file}/${item}`;
+        let type = fs.statSync(nextFile);
+        if (type.isFile()) {
+            array = [...array, {file: nextFile, name: item}];
+        }else{
+            array = [...array, ...getFiles(nextFile)];
+        }
+    })
+    return array;
+}
+
+let files = getFiles(path.resolve(__dirname, './dist/component/')).filter(item => item.name.indexOf('.ts') === -1);
 
 module.exports = {
     entry: {
-        index: './dist/index.js',
+        index: './dist/component/index.js',
     },
     output: {
-        path: path.resolve(__dirname, 'npm'),
-        filename: '[name].js'
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'index.js'
     },
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'cat-react-tool.css'
         }),
+        new CssModuleToString({
+            files,
+        }),
     ],
     module: {
         rules: [{
+            test: /\.(css|less)$/,
+            loader: CssModuleToString.loader,
+        },{
             test: /\.(css|less)$/,
             use: [{
                     loader: MiniCssExtractPlugin.loader,

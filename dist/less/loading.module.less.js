@@ -1,0 +1,2 @@
+// extracted by mini-css-extract-plugin
+module.exports = {"loading":"cat__loading-module__loading__7fd68","box":"cat__loading-module__box__70c26","icon":"cat__loading-module__icon__07098","loadingPng":"cat__loading-module__loadingPng__31fce","text":"cat__loading-module__text__74470"};

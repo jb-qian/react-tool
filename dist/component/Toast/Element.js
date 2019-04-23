@@ -1,60 +1,39 @@
-"use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-exports.__esModule = true;
 /*
  * @Author: 宋乾
  * @Date: 2019-01-10 10:50:18
  * @LastEditors: 宋乾
  * @LastEditTime: 2019-03-20 09:49:21
  */
-var React = require("react");
-var styles = require("../../less/toast.module.less");
-var Element = /** @class */ (function (_super) {
-    __extends(Element, _super);
-    function Element(props) {
-        var _this = _super.call(this, props) || this;
+import * as React from 'react';
+import * as styles from '../../less/toast.module.less.js';
+export default class Element extends React.Component {
+    constructor(props) {
+        super(props);
         /**
          * 动画结束
          */
-        _this.transitionend = function () {
-            _this.toast.removeEventListener('transitionend', _this.transitionend);
-            _this.props.willUnmount();
+        this.transitionend = () => {
+            this.toast.removeEventListener('transitionend', this.transitionend);
+            this.props.willUnmount();
         };
-        _this.state = {
-            duration: _this.props.duration || 3000,
-            show: true
+        this.state = {
+            duration: this.props.duration || 3000,
+            show: true,
         };
-        return _this;
     }
-    Element.prototype.componentDidMount = function () {
-        var _this = this;
+    componentDidMount() {
         this.toast.addEventListener('transitionend', this.transitionend);
         // 时间大于0 自动隐藏
         if (this.state.duration > 0) {
-            setTimeout(function () {
-                _this.setState({
-                    show: false
+            setTimeout(() => {
+                this.setState({
+                    show: false,
                 });
             }, this.state.duration);
         }
-    };
-    Element.prototype.render = function () {
-        var _this = this;
-        return (React.createElement("div", { ref: function (e) { return _this.toast = e; }, className: [styles.toast, this.state.show ? '' : styles.hide].join(' ') },
+    }
+    render() {
+        return (React.createElement("div", { ref: e => this.toast = e, className: [styles.toast, this.state.show ? '' : styles.hide].join(' ') },
             React.createElement("div", { className: styles.text }, this.props.text)));
-    };
-    return Element;
-}(React.Component));
-exports["default"] = Element;
+    }
+}

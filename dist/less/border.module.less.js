@@ -1,0 +1,2 @@
+// extracted by mini-css-extract-plugin
+module.exports = {"brt":"cat__border-module__brt__7c190","brb":"cat__border-module__brb__76623","brl":"cat__border-module__brl__8f9b4","brr":"cat__border-module__brr__5eefd","br1":"cat__border-module__br1__df654"};

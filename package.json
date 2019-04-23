@@ -71,9 +71,9 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "publish": "node scripts/publish.js",
-    "publish-to-npm": "npm run publish && node scripts/publish-to-npm.js",
+    "publish-to-npm": "node scripts/publish-to-npm.js",
     "ts-dev": "webpack --mode development --config webpack.config.js",
-    "ts": "webpack --mode production --config webpack.config.js"
+    "npm": "npm run publish && webpack --mode production --config webpack.config.js"
   },
   "husky": {
     "hooks": {
