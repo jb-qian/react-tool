@@ -35,8 +35,6 @@ module.exports = {
                 {
                     loader: require.resolve('postcss-loader'),
                     options: {
-                        // Necessary for external CSS imports to work
-                        // https://github.com/facebookincubator/create-react-app/issues/2677
                         ident: 'postcss',
                         plugins: () => [
                             require('postcss-flexbugs-fixes'),
@@ -53,13 +51,8 @@ module.exports = {
                     loader: require.resolve('less-loader'),
                 },
             ],
-            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
         }, {
             loader: require.resolve('file-loader'),
-            // Exclude `js` files to keep "css" loader working as it injects
-            // its runtime that would otherwise be processed through "file" loader.
-            // Also exclude `html` and `json` extensions so they get processed
-            // by webpacks internal loaders.
             exclude: [/\.(js|mjs|jsx|ts|tsx|less)$/, /\.html$/, /\.json$/],
             options: {
                 name: 'static/media/[name].[hash:8].[ext]',
@@ -70,7 +63,4 @@ module.exports = {
         "react": 'React',
         'react-dom': 'ReactDOM'
     },
-    // resolve: {
-    //     extensions: ['.tsx', '.ts', '.js']
-    // },
 }
