@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:28:30
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-20 09:49:16
+ * @LastEditTime: 2019-04-26 16:19:22
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -116,11 +116,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
     public onChange = (e:any) => {
         // 用不到
-        console.log(e);
+        // console.log(e);
     }
     public render (){
         let defaultValue = !(this.props.defaultValue || this.defaultValue).value && !this.state.value;
-        let className = [this.props.className, defaultValue ? 'default' : ''].filter(item => item);
+        let className = [this.props.className, defaultValue ? styles.defaultValue : ''].filter(item => item);
         return (
             <div className={ className.join(' ') } onClick={ this.click }>
                 <select style={{ display: 'none' }} name={ this.props.name } data-error={ this.props.error } data-value={ this.state.value } onChange={ this.onChange } />

@@ -12,3 +12,4 @@ export const head: string;
 export const headBtn: string;
 export const headBtnactive: string;
 export const headTitle: string;
+export const defaultValue: string;

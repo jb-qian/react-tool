@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:28:30
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-20 09:49:16
+ * @LastEditTime: 2019-04-26 16:19:22
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -60,7 +60,7 @@ export default class Select extends React.Component {
         };
         this.onChange = (e) => {
             // 用不到
-            console.log(e);
+            // console.log(e);
         };
         this.defaultValue.text = this.props.placeholder || '请选择';
         let { value, text } = this.props.defaultValue || this.defaultValue;
@@ -71,7 +71,7 @@ export default class Select extends React.Component {
     }
     render() {
         let defaultValue = !(this.props.defaultValue || this.defaultValue).value && !this.state.value;
-        let className = [this.props.className, defaultValue ? 'default' : ''].filter(item => item);
+        let className = [this.props.className, defaultValue ? styles.defaultValue : ''].filter(item => item);
         return (React.createElement("div", { className: className.join(' '), onClick: this.click },
             React.createElement("select", { style: { display: 'none' }, name: this.props.name, "data-error": this.props.error, "data-value": this.state.value, onChange: this.onChange }),
             this.state.text));

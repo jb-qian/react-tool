@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 11:08:12
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-20 09:48:46
+ * @LastEditTime: 2019-04-26 16:19:45
  */
 import * as React from 'react';
 import * as styles from '../../less/button.module.less';
@@ -32,9 +32,7 @@ export default class Button extends React.Component<Props> {
         if (this.props.disabled) {
             return;
         }
-        if (this.props.onClick) {
-            this.props.onClick();
-        }
+        this.props.onClick && this.props.onClick();
     }
     public render() {
         return (
