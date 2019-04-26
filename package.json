@@ -72,7 +72,7 @@
     "test": "node scripts/test.js",
     "publish": "node scripts/publish.js",
     "publish-to-npm": "node scripts/publish-to-npm.js",
-    "ts-dev": "webpack --mode development --config webpack.config.js",
+    "dev": "webpack --mode development --config webpack.config.js",
     "npm": "npm run publish && webpack --mode production --config webpack.config.js"
   },
   "husky": {

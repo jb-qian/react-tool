@@ -23,7 +23,7 @@
     "noImplicitUseStrict": true,
   },
   "include": [
-    "./src/component/**/*",
+    "./src/npm.ts",
   ],
   "exclude": [
     "node_modules",
