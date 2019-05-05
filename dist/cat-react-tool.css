@@ -466,6 +466,7 @@
 .cat__toast-module__text__bfa38 {
   color: #fff;
   font-size: 14px;
+  white-space: pre-line;
 }
 .cat__toast-module__hide__f7a97 {
   opacity: 0;

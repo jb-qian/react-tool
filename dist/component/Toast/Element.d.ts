@@ -5,10 +5,8 @@ interface ToastProps extends Props {
 }
 interface State {
     show: boolean;
-    duration: number;
 }
 export default class Element extends React.Component<ToastProps, State> {
-    refs: any;
     toast: any;
     constructor(props: ToastProps);
     /**
@@ -16,6 +14,7 @@ export default class Element extends React.Component<ToastProps, State> {
      */
     transitionend: () => void;
     componentDidMount(): void;
+    componentWillUnmount(): void;
     render(): JSX.Element;
 }
 export {};
