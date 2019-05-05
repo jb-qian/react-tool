@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:50:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-20 09:49:01
+ * @LastEditTime: 2019-05-05 15:00:55
  */
 import * as React from 'react';
 
@@ -26,6 +26,8 @@ export default class Element extends React.Component<SelectProps, State> {
     public refSelectMask:HTMLDivElement | null;
 
     public timer: NodeJS.Timeout;
+
+    public isMove: boolean = false;
 
     public reflist = {};
 
@@ -115,17 +117,24 @@ export default class Element extends React.Component<SelectProps, State> {
         let mask = this.refSelectMask;
         if (mask) {
             mask[type]('touchstart', this.maskTouchStart);
+            mask[type]('touchmove', this.maskTouchMove);
             mask[type]('touchend', this.maskTouchEnd);
         }
     }
-    public maskTouchStart = (e: any) => {
+    public maskTouchStart = (e: Event) => {
         e.preventDefault();
         e.stopPropagation();
+        this.isMove = false;
     }
-    public maskTouchEnd = (e: any) => {
+    public maskTouchMove = (e: Event) => {
         e.preventDefault();
         e.stopPropagation();
-        this.onClose();
+        this.isMove = true;
+    }
+    public maskTouchEnd = (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        !this.isMove && this.onClose();
     }
     public componentDidMount (){
         this.touch('addEventListener');

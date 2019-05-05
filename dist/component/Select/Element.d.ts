@@ -12,6 +12,7 @@ interface State {
 export default class Element extends React.Component<SelectProps, State> {
     refSelectMask: HTMLDivElement | null;
     timer: NodeJS.Timeout;
+    isMove: boolean;
     reflist: {};
     constructor(props: SelectProps);
     initNumber: (num: string | number) => string | number;
@@ -21,8 +22,9 @@ export default class Element extends React.Component<SelectProps, State> {
     onConfirm: () => void;
     onChange: (index: number, item?: Value) => void;
     touch: (type: string) => void;
-    maskTouchStart: (e: any) => void;
-    maskTouchEnd: (e: any) => void;
+    maskTouchStart: (e: Event) => void;
+    maskTouchMove: (e: Event) => void;
+    maskTouchEnd: (e: Event) => void;
     componentDidMount(): void;
     componentWillUnmount(): void;
     listView(): JSX.Element[];

@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-29 09:10:26
+ * @LastEditTime: 2019-05-05 14:40:25
  */
 import * as React from 'react';
 import * as styles from '../../less/select.module.less.js';
@@ -54,7 +54,6 @@ export default class List extends React.Component {
         this.init = (data) => {
             // 触摸值
             this.start = 0;
-            this.move = 0;
             this.end = 0;
             // 是否移动了
             this.isMore = false;
@@ -87,47 +86,50 @@ export default class List extends React.Component {
             e.stopPropagation();
             let { pageY } = e.targetTouches[0];
             this.start = pageY;
-            this.startY = pageY;
+            this.end = this.state.currentMove;
             this.isMore = false;
             this.startTime = +new Date();
             this.isInertial = false;
+            this.startY = pageY;
         };
         this.onTouchMove = (e) => {
             e.preventDefault();
             e.stopPropagation();
             let { pageY } = e.targetTouches[0];
-            this.move = this.start - pageY + this.end;
-            if (this.move < this.min - this.rotateX * 2) {
-                this.move = this.min - this.rotateX * 2;
+            let move = (this.start - pageY) / 1.5 + this.end;
+            if (move < this.min - this.rotateX) {
+                move = this.min - this.rotateX;
             }
-            if (this.move > this.max + this.rotateX * 2) {
-                this.move = this.max + this.rotateX * 2;
+            if (move > this.max + this.rotateX) {
+                move = this.max + this.rotateX;
             }
-            this.setTransform(this.move, '');
+            this.setTransform(move, '');
             this.isMore = true;
             this.isInertial = false;
             this.endY = pageY;
         };
         this.setEnd = (start, position, end = 0) => {
-            const t = 1000 / 60;
+            const t = 1000 / 60 / 3.5;
             // 加速度
             const a = -0.003;
+            // 移动的距离
+            let move = this.state.currentMove;
             // 未结束
             if (start - end > 0 && !this.isInertial) {
                 this.isInertial = false;
                 // v末 = v初 + at
                 let newStart = start + a * t;
                 // S = vt + 1/2at^2;
-                this.move = (position * start * t) + (0.5 * a * t * t) + this.move;
-                if (this.move < this.min - this.rotateX * 2) {
-                    this.move = this.min - this.rotateX * 2;
+                move = (position * start * t) + (0.5 * a * t * t) + move;
+                if (move < this.min - this.rotateX) {
+                    move = this.min - this.rotateX;
                     this.isInertial = true;
                 }
-                if (this.move > this.max + this.rotateX * 2) {
-                    this.move = this.max + this.rotateX * 2;
+                if (move > this.max + this.rotateX) {
+                    move = this.max + this.rotateX;
                     this.isInertial = true;
                 }
-                this.setTransform(this.move, '');
+                this.setTransform(move, '');
                 requestAnimationFrame(() => {
                     this.setEnd(newStart, position, end);
                 });
@@ -135,15 +137,14 @@ export default class List extends React.Component {
             else {
                 this.isInertial = false;
                 // 结束
-                if (this.move < this.min) {
-                    this.move = this.min;
+                if (move < this.min) {
+                    move = this.min;
                 }
-                if (this.move > this.max) {
-                    this.move = this.max;
+                if (move > this.max) {
+                    move = this.max;
                 }
-                let index = Math.round(this.move / this.rotateX);
-                this.setTransform(index * this.rotateX, `transform 300ms ease-out 0s`);
-                this.end = this.move;
+                let index = Math.round(move / this.rotateX);
+                this.setTransform(index * this.rotateX, `transform 200ms ease-out 0s`);
                 this.props.onChange(this.state.data[index]);
             }
         };

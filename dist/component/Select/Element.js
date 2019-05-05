@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:50:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-20 09:49:01
+ * @LastEditTime: 2019-05-05 15:00:55
  */
 import * as React from 'react';
 import List from './List';
@@ -11,6 +11,7 @@ import * as border from '../../less/border.module.less.js';
 export default class Element extends React.Component {
     constructor(props) {
         super(props);
+        this.isMove = false;
         this.reflist = {};
         this.initNumber = (num) => {
             if (num < 10) {
@@ -88,17 +89,24 @@ export default class Element extends React.Component {
             let mask = this.refSelectMask;
             if (mask) {
                 mask[type]('touchstart', this.maskTouchStart);
+                mask[type]('touchmove', this.maskTouchMove);
                 mask[type]('touchend', this.maskTouchEnd);
             }
         };
         this.maskTouchStart = (e) => {
             e.preventDefault();
             e.stopPropagation();
+            this.isMove = false;
+        };
+        this.maskTouchMove = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.isMove = true;
         };
         this.maskTouchEnd = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            this.onClose();
+            !this.isMove && this.onClose();
         };
         this.state = {
             active: false,
