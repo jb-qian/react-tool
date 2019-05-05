@@ -2,9 +2,11 @@
  * @Author: 宋乾
  * @Date: 2019-01-24 15:46:24
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-04-15 23:29:18
+ * @LastEditTime: 2019-05-05 16:18:44
  */
 import * as React from 'react';
+
+import * as styles from '../../less/input.module.less';
 
 /**
  * @param type input 类型
@@ -47,11 +49,12 @@ export default class Input extends React.Component<InputProps> {
     }
     public render() {
         let type = {
+            ...this.props,
             type: this.props.type,
             maxLength: this.props.maxLength || undefined,
             name: this.props.name,
-            className: this.props.className,
-            style: this.props.style,
+            className: styles.input,
+            style: {},
             onInput: this.onInput,
             onChange: this.onChange,
             placeholder: this.props.placeholder,
@@ -64,9 +67,13 @@ export default class Input extends React.Component<InputProps> {
             type['data-type'] = 'mobile';
         }
         return (
-            this.props.type === 'textarea' ?
-            <textarea {...type} /> :
-            <input {...type} />
+            <div style={ this.props.style } className={ this.props.className }>
+                {
+                    this.props.type === 'textarea' ?
+                    <textarea {...type} /> :
+                    <input {...type} />
+                }
+            </div>
         )
     }
 }

@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-05 14:00:11
+ * @LastEditTime: 2019-05-05 16:15:01
  */
 import * as React from 'react';
 
@@ -120,7 +120,7 @@ class App extends React.Component<Props, State> {
 			text: arr.join('\n'),
 		})
 	}
-	public input = (key, value) => {
+	public input = (key: string, value: string) => {
 		console.log(key, value);
 	}
 	public render() {
@@ -137,7 +137,7 @@ class App extends React.Component<Props, State> {
 						type={ 'password' }
 						maxLength={ 6 }
 						name={ 'password' }
-						className={ styles.input }
+						className={ [styles.input, border.br1].join(' ') }
 						onInput={ (value: string) => this.input('password', value) }
 						placeholder={ '请输入密码' }
 						error={ '请输入密码' }
@@ -145,13 +145,13 @@ class App extends React.Component<Props, State> {
 					<Input
 						type={ 'mobile' }
 						name={ 'mobile' }
-						className={ styles.input }
+						className={ [styles.input, border.br1].join(' ') }
 					/>
 					<Select
 						data={ this.state.select }
 						onConfirm={ this.onSelectChange }
 						name={ 'username' }
-						className={ styles.select }
+						className={ [styles.select, border.br1].join(' ') }
 						placeholder={ '请选择名称' }
 						error={ '请选择名称' }
 					/>
@@ -160,14 +160,14 @@ class App extends React.Component<Props, State> {
 						end={ 2019 }
 						onConfirm={ this.onSelectChange }
 						name={ 'time' }
-						className={ styles.select }
+						className={ [styles.select, border.br1].join(' ') }
 						placeholder={ '请选择时间' }
 						error={ '请选择时间' }
 					/>
 					<Cities
 						onConfirm={ this.onSelectChange }
 						name={ 'cities' }
-						className={ styles.select }
+						className={ [styles.select, border.br1].join(' ') }
 						placeholder={ '请选择城市' }
 						error={ '请选择城市' }
 					/>
@@ -175,7 +175,7 @@ class App extends React.Component<Props, State> {
 						type={ 'textarea' }
 						maxLength={ 100 }
 						name={ 'textarea' }
-						className={ styles.textarea }
+						className={ [styles.textarea, border.br1].join(' ') }
 						placeholder={ '请输入文字' }
 						error={ '请输入文字' }
 					/>
