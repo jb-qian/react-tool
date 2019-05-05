@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 09:15:22
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 11:24:09
+ * @LastEditTime: 2019-05-05 13:46:11
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -22,11 +22,13 @@ export interface Props {
 const App = (props: Props) => {
     let div: any = document.getElementById('sq-toast');
 
-    if (!div) {
-        div = document.createElement('div');
-        div.id = 'sq-toast';
-        document.body.appendChild(div);
+    if (div) {
+        document.body.removeChild(div);
     }
+    
+    div = document.createElement('div');
+    div.id = 'sq-toast';
+    document.body.appendChild(div);
 
     const element = React.createElement(Element, Object.assign(props, {
         willUnmount: () => {

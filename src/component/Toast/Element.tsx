@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-10 10:50:18
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-20 09:49:21
+ * @LastEditTime: 2019-05-05 13:46:08
  */
 import * as React from 'react';
 
@@ -14,18 +14,15 @@ interface ToastProps extends Props {
 }
 interface State{
     show: boolean;
-    duration: number;
 }
 
 export default class Element extends React.Component<ToastProps, State> {
 
-    public refs:any;
     public toast:any;
 
     constructor (props:ToastProps){
         super(props)
         this.state = {
-            duration: this.props.duration || 3000,
             show: true,
         }
     }
@@ -38,14 +35,12 @@ export default class Element extends React.Component<ToastProps, State> {
     }
     public componentDidMount (){
         this.toast.addEventListener('transitionend', this.transitionend);
-        // 时间大于0 自动隐藏
-        if (this.state.duration > 0) {
-            setTimeout(() => {
-                this.setState({
-                    show: false,
-                })
-            }, this.state.duration);
-        }
+        setTimeout(() => {
+            this.setState({ show: false })
+        }, this.props.duration || 3000);
+    }
+    public componentWillUnmount (){
+        this.toast.removeEventListener('transitionend', this.transitionend);
     }
     public render (){
         return (

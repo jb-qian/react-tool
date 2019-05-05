@@ -21,6 +21,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "noImplicitUseStrict": true,
+    "experimentalDecorators": true,
   },
   "include": [
     "./src/npm.ts",

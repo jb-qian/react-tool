@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-04-15 22:35:57
+ * @LastEditTime: 2019-05-05 11:58:52
  */
 import * as React from 'react';
 
@@ -27,6 +27,8 @@ import Select from './component/Select/Select';
 import Cities from './Cities';
 import Date from './Date';
 
+import axios from 'axios';
+
 /**
  * 设计稿750
  * 100px => 1rem
@@ -47,11 +49,19 @@ interface State {
 	rules: {};
 }
 
+const log = (target, name, descriptor) => {
+	let oldValue = descriptor.value;
+	descriptor.value = function (text) {
+		console.log(text, '被弹出');
+		return oldValue.call(this, `弹出：${text}`);
+	};
+	return descriptor;
+}
 class App extends React.Component<Props, State> {
 	constructor(props: Props){
 		super(props)
 		this.state = {
-			loading: true,
+			loading: false,
 			select: [{
 				value: 0,
 				text: '卡车之家',
@@ -71,11 +81,24 @@ class App extends React.Component<Props, State> {
 			}
 		}
 	}
-	public toast = () => {
-		Toast({
-			duration: 3000,
-			text: '我是一个3秒的toast',
+	public ajax (){
+		this.setState({
+			loading: true,
 		})
+		axios.get('/').then(res => {
+			this.setState({
+				loading: false,
+			})
+		})
+	}
+	@log
+	public name (text: string){
+		Toast({
+			text,
+		})
+	}
+	public toast = () => {
+		this.name('我是小明')
 	}
 	public alert = () => {
 		Alert({
@@ -84,17 +107,18 @@ class App extends React.Component<Props, State> {
 		})
 	}
 	public componentDidMount (){
-		setTimeout(() => {
-			this.setState({
-				loading: false,
-			})
-		}, 1000);
+		this.ajax();
 	}
 	public onSelectChange = (item: Value[]) => {
 		console.log(item);
 	}
-	public submit = (form:object) => {
-		console.log(form);
+	public submit = (form: object) => {
+		let arr = Object.entries(form).map((item) => {
+			return item.join(': ');
+		})
+		Toast({
+			text: arr.join('\n'),
+		})
 	}
 	public input = (key, value) => {
 		console.log(key, value);
@@ -111,7 +135,7 @@ class App extends React.Component<Props, State> {
 				<Form submit={ this.submit } toast={ Toast } rules={ this.state.rules }>
 					<Input
 						type={ 'password' }
-						maxLength={ 10 }
+						maxLength={ 6 }
 						name={ 'password' }
 						className={ styles.input }
 						onInput={ (value: string) => this.input('password', value) }
