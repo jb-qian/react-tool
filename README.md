@@ -227,5 +227,7 @@ interface Value {
  ```
  Rem.set(750); 设置html font-size 以设计稿750为基准 1rem == 100px
  Rem.get(750); 返回 以750为基准的像素值
+ @Mounted 装饰器，用于装饰react组件，可以防止组件卸载后调用setState 导致报错的问题
+ @readonly 装饰器，用于设置属性只读，不可被修改
  ```
  
