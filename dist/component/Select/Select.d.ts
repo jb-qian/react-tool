@@ -46,7 +46,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     constructor(props: SelectProps);
     click: () => void;
     setValue: (data: Value[], isConfirm: boolean) => void;
-    onChange: (e: any) => void;
+    onChange: () => void;
     render(): JSX.Element;
 }
 export {};

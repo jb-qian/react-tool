@@ -39,10 +39,12 @@ class CssModuleToString{
                     })
                 }
             })
-            // 重写入口文件
-            indexJs = AddCss(indexJs);
-            compilation.assets['index.js'] = {
+            compilation.assets['index.d.ts'] = {
                 source: () => indexJs,
+                size: () => indexJs.length,
+            };
+            compilation.assets['index.js'] = {
+                source: () => AddCss(indexJs),
                 size: () => indexJs.length,
             };
         })

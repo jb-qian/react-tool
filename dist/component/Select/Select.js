@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:28:30
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-04-26 16:19:22
+ * @LastEditTime: 2019-05-06 15:59:33
  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -58,9 +58,8 @@ export default class Select extends React.Component {
                 this.props.onChange && this.props.onChange(data);
             }
         };
-        this.onChange = (e) => {
+        this.onChange = () => {
             // 用不到
-            // console.log(e);
         };
         this.defaultValue.text = this.props.placeholder || '请选择';
         let { value, text } = this.props.defaultValue || this.defaultValue;

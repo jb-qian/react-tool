@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-18 14:59:31
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-03-19 13:49:46
+ * @LastEditTime: 2019-05-06 16:56:12
  */
 
 const PX = (size: number = 750) => {
@@ -16,19 +16,59 @@ const PX = (size: number = 750) => {
     return { html, px };
 }
 
-class Rem {
-    public static set = (size: number = 750) => {
+const Rem = {
+    set: (size: number = 750) => {
         let { html, px } = PX(size);
         // 设置html字体大小
         html.setAttribute('style', `font-size: ${px}px !important`);
-    }
-    public static get = (size: number = 750) => {
+    },
+    get: (size: number = 750) => {
         let { px } = PX(size);
         // 返回px值
         return px;
     }
 }
 
+// 组件被销毁后阻止数据改变
+function Mounted(target: Function) {
+    const _target = target.prototype;
+    
+	const {
+		componentDidMount,
+        componentWillUnmount,
+		setState,
+    } = _target;
+
+    let _isMounted = false;
+
+    
+	_target.componentDidMount = function (){
+        componentDidMount && componentDidMount.call(this);
+		_isMounted = true;
+    }
+    
+	_target.componentWillUnmount = function (){
+		componentWillUnmount && componentWillUnmount.call(this);
+        _isMounted = false;
+	}
+
+	_target.setState = function (){
+		if (_isMounted) {
+			setState.apply(this, arguments);
+		}
+    }
+}
+
+// 只读
+function readonly(...args: any) {
+    let descriptor = args[2];
+    descriptor.writable = false;
+    return descriptor;
+}
+
 export default {
     Rem,
+    PX,
+    Mounted,
+    readonly,
 };

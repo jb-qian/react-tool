@@ -2,14 +2,17 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 11:50:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-05 15:00:55
+ * @LastEditTime: 2019-05-06 17:03:10
  */
 import * as React from 'react';
 
 import { Props, Value } from './Select';
 import List from './List';
+import Tool from '../Tool/Tool';
 import * as styles from '../../less/select.module.less';
 import * as border from '../../less/border.module.less';
+
+let { Mounted } = Tool;
 
 interface SelectProps extends Props {
     willUnmount: () => void;
@@ -21,6 +24,7 @@ interface State {
     value: Value[];
 }
 
+@Mounted
 export default class Element extends React.Component<SelectProps, State> {
 
     public refSelectMask:HTMLDivElement | null;
@@ -81,37 +85,27 @@ export default class Element extends React.Component<SelectProps, State> {
         this.props.willUnmount();
     }
     public onChange = (index: number, item: Value = { value: '', text: '' }) => {
-        this.setState(prev => {
-            let value = [...prev.value];
-            value[index] = item;
-            return {
-                value,
-            }
-        })
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
+        setTimeout(() => {
             this.props.setValue(this.state.value);
-        }, 10);
-        this.setState(prev => {
-            let data = [...prev.data];
-            data[index + 1] = item.children || [];
-            return {
-                data,
-            }
-        })
-        // 时间单独处理
-        if (this.props.type === 'date') {
             this.setState(prev => {
+                let value = [...prev.value];
                 let data = [...prev.data];
-                data[1] = this.getMonth();
-                let year = (this.state.value[0] || { value: 1970 }).value;
-                let month = (this.state.value[1] || { value: 1 }).value;
-                data[2] = this.getDate(year, month);
+                value[index] = item;
+                // 时间单独处理
+                if (this.props.type === 'date') {
+                    data[1] = this.getMonth();
+                    let year = (this.state.value[0] || { value: 1970 }).value;
+                    let month = (this.state.value[1] || { value: 1 }).value;
+                    data[2] = this.getDate(year, month);
+                }else{
+                    data[index + 1] = item.children || [];
+                }
                 return {
                     data,
+                    value,
                 }
             })
-        }
+        }, 0);
     }
     public touch = (type: string) => {
         let mask = this.refSelectMask;

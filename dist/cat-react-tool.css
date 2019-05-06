@@ -203,6 +203,13 @@
   position: absolute;
 }
 
+.cat__input-module__input__f8564 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 @-webkit-keyframes cat__loading-module__loadingPng__31fce {
   0% {
     -webkit-transform: rotate(0);
@@ -467,6 +474,7 @@
   color: #fff;
   font-size: 14px;
   white-space: pre-line;
+  line-height: 24px;
 }
 .cat__toast-module__hide__f7a97 {
   opacity: 0;

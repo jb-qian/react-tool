@@ -1,13 +1,16 @@
+import * as tslib_1 from "tslib";
 /*
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-05 14:40:25
+ * @LastEditTime: 2019-05-06 17:03:55
  */
 import * as React from 'react';
+import Tool from '../Tool/Tool';
 import * as styles from '../../less/select.module.less.js';
 import * as border from '../../less/border.module.less.js';
-export default class List extends React.Component {
+let { Mounted } = Tool;
+let List = class List extends React.Component {
     constructor(props) {
         super(props);
         // 转轮高度
@@ -145,7 +148,7 @@ export default class List extends React.Component {
                 }
                 let index = Math.round(move / this.rotateX);
                 this.setTransform(index * this.rotateX, `transform 200ms ease-out 0s`);
-                this.props.onChange(this.state.data[index]);
+                this.onChange(this.state.data[index]);
             }
         };
         this.onTouchEnd = (e) => {
@@ -175,9 +178,7 @@ export default class List extends React.Component {
         this.iPhone = (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1) && (o.indexOf('iphone') > -1 || o.indexOf('ipad') > -1 || o.indexOf('ipod') > -1);
     }
     componentDidMount() {
-        if (this.state.data.length) {
-            this.init(this.state.data);
-        }
+        this.state.data.length && this.init(this.state.data);
         this.touch('addEventListener');
     }
     componentDidUpdate() {
@@ -195,6 +196,7 @@ export default class List extends React.Component {
         }
     }
     componentWillUnmount() {
+        this.isInertial = true;
         this.touch('removeEventListener');
     }
     render() {
@@ -209,4 +211,8 @@ export default class List extends React.Component {
             React.createElement("div", { className: [styles.active, border.brt, border.brb].join(' ') }),
             React.createElement("div", { ref: e => this.refSelectList = e, className: styles.maskContent })));
     }
-}
+};
+List = tslib_1.__decorate([
+    Mounted
+], List);
+export default List;

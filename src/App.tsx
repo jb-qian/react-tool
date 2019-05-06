@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-05 16:15:01
+ * @LastEditTime: 2019-05-06 13:37:31
  */
 import * as React from 'react';
 
@@ -13,7 +13,11 @@ import * as border from './less/border.module.less';
 
 import Tool from './component/Tool/Tool';
 
-const { Rem } = Tool;
+const {
+	Rem,
+	Mounted,
+	readonly,
+} = Tool;
 
 import Alert from './component/Alert/Alert';
 import Toast from './component/Toast/Toast';
@@ -28,6 +32,15 @@ import Cities from './Cities';
 import Date from './Date';
 
 import axios from 'axios';
+
+const log = (target: any, name: string, descriptor: any) => {
+	let oldValue = descriptor.value;
+	descriptor.value = function (text: string) {
+		console.log(text, '被弹出');
+		return oldValue.call(this, `弹出：${text}`);
+	};
+	return descriptor;
+}
 
 /**
  * 设计稿750
@@ -45,23 +58,41 @@ interface Props {
 }
 interface State {
 	loading: boolean;
+	number: number;
 	select: Value[];
 	rules: {};
 }
 
-const log = (target, name, descriptor) => {
-	let oldValue = descriptor.value;
-	descriptor.value = function (text) {
-		console.log(text, '被弹出');
-		return oldValue.call(this, `弹出：${text}`);
-	};
-	return descriptor;
+interface NameProps {
+	number: number;
 }
+
+@Mounted
+class Text extends React.Component<NameProps> {
+	public componentWillUnmount (){
+		setTimeout(() => {
+			this.setState({
+				text: '',
+			})
+		});
+	}
+	public render (){
+		return (
+			<div>{ this.props.number }秒后，我即使被隐藏也不会报错</div>
+		)
+	}
+}
+
 class App extends React.Component<Props, State> {
+
+	@readonly
+	public text: string = 'componentWillUnmount调用了setState，但是没报错';
+
 	constructor(props: Props){
 		super(props)
 		this.state = {
 			loading: false,
+			number: 3,
 			select: [{
 				value: 0,
 				text: '卡车之家',
@@ -73,10 +104,11 @@ class App extends React.Component<Props, State> {
 				text: '卡家好车',
 			}],
 			rules: {
-				password: (value) => {
+				password: (value: string) => {
 					if (value.length !== 6) {
 						return '请输入6位密码';
 					}
+					return '';
 				}
 			}
 		}
@@ -108,6 +140,24 @@ class App extends React.Component<Props, State> {
 	}
 	public componentDidMount (){
 		this.ajax();
+		// 倒计时
+		let timer = setInterval(() => {
+			this.setState(prev => {
+				let number = prev.number - 1;
+				if (number === 0) {
+					clearInterval(timer);
+				}
+				return {
+					number,
+				}
+			})
+		}, 1000);
+		// 修改不能改变的值
+		try {
+			this.text = '文字被修改';
+		} catch (error) {
+			console.log('只读属性text不能被改变', error);
+		}
 	}
 	public onSelectChange = (item: Value[]) => {
 		console.log(item);
@@ -127,7 +177,11 @@ class App extends React.Component<Props, State> {
 		let btnStyles = [styles.btn, border.br1].join(' ');
 		return (
 			<div className={ styles.App } >
-				<Button className={ btnStyles } onClick={ this.toast } disabled={ true }>被禁止的按钮</Button>
+				<Button className={ btnStyles } onClick={ this.toast } disabled={ true }>
+				{
+					!!this.state.number ? <Text number={ this.state.number } /> : this.text
+				}
+				</Button>
 				<Button className={ btnStyles } onClick={ this.toast }>Toast</Button>
 				<Button className={ btnStyles } onClick={ this.alert }>Alert</Button>
 				<Image className={ styles.image } src={ 'https://img7.kcimg.cn/uploads/c7/4c/c74cd79689721906d4a5831031a5c8e4.jpg' } />

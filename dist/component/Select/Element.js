@@ -1,14 +1,17 @@
+import * as tslib_1 from "tslib";
 /*
  * @Author: 宋乾
  * @Date: 2019-01-25 11:50:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-05 15:00:55
+ * @LastEditTime: 2019-05-06 17:03:10
  */
 import * as React from 'react';
 import List from './List';
+import Tool from '../Tool/Tool';
 import * as styles from '../../less/select.module.less.js';
 import * as border from '../../less/border.module.less.js';
-export default class Element extends React.Component {
+let { Mounted } = Tool;
+let Element = class Element extends React.Component {
     constructor(props) {
         super(props);
         this.isMove = false;
@@ -53,37 +56,28 @@ export default class Element extends React.Component {
             this.props.willUnmount();
         };
         this.onChange = (index, item = { value: '', text: '' }) => {
-            this.setState(prev => {
-                let value = [...prev.value];
-                value[index] = item;
-                return {
-                    value,
-                };
-            });
-            clearTimeout(this.timer);
-            this.timer = setTimeout(() => {
+            setTimeout(() => {
                 this.props.setValue(this.state.value);
-            }, 10);
-            this.setState(prev => {
-                let data = [...prev.data];
-                data[index + 1] = item.children || [];
-                return {
-                    data,
-                };
-            });
-            // 时间单独处理
-            if (this.props.type === 'date') {
                 this.setState(prev => {
+                    let value = [...prev.value];
                     let data = [...prev.data];
-                    data[1] = this.getMonth();
-                    let year = (this.state.value[0] || { value: 1970 }).value;
-                    let month = (this.state.value[1] || { value: 1 }).value;
-                    data[2] = this.getDate(year, month);
+                    value[index] = item;
+                    // 时间单独处理
+                    if (this.props.type === 'date') {
+                        data[1] = this.getMonth();
+                        let year = (this.state.value[0] || { value: 1970 }).value;
+                        let month = (this.state.value[1] || { value: 1 }).value;
+                        data[2] = this.getDate(year, month);
+                    }
+                    else {
+                        data[index + 1] = item.children || [];
+                    }
                     return {
                         data,
+                        value,
                     };
                 });
-            }
+            }, 0);
         };
         this.touch = (type) => {
             let mask = this.refSelectMask;
@@ -143,4 +137,8 @@ export default class Element extends React.Component {
                     return item;
                 })))));
     }
-}
+};
+Element = tslib_1.__decorate([
+    Mounted
+], Element);
+export default Element;

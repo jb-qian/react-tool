@@ -2,13 +2,16 @@
  * @Author: 宋乾
  * @Date: 2019-01-25 15:48:42
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-05 14:40:25
+ * @LastEditTime: 2019-05-06 17:03:55
  */
 import * as React from 'react';
 
 import { Value } from './Select';
+import Tool from '../Tool/Tool';
 import * as styles from '../../less/select.module.less';
 import * as border from '../../less/border.module.less';
+
+let { Mounted } = Tool;
 
 /**
  * @param onChange 点击回调
@@ -31,6 +34,7 @@ interface State{
     data: Value[];
 }
 
+@Mounted
 export default class List extends React.Component<ListProps, State> {
     // 转轮高度
     public height:number = 40;
@@ -120,9 +124,7 @@ export default class List extends React.Component<ListProps, State> {
         }
     }
     public componentDidMount (){
-        if (this.state.data.length) {
-            this.init(this.state.data);
-        }
+        this.state.data.length && this.init(this.state.data);
         this.touch('addEventListener');
     }
     public componentDidUpdate (){
@@ -139,6 +141,7 @@ export default class List extends React.Component<ListProps, State> {
         }
     }
     public componentWillUnmount (){
+        this.isInertial = true;
         this.touch('removeEventListener');
     }
     public setTransform = (currentMove: number, transition: string) => {
@@ -210,7 +213,7 @@ export default class List extends React.Component<ListProps, State> {
             }
             let index = Math.round(move / this.rotateX);
             this.setTransform(index * this.rotateX, `transform 200ms ease-out 0s`);
-            this.props.onChange(this.state.data[index]);
+            this.onChange(this.state.data[index]);
         }
     }
     public onTouchEnd = (e: any) => {
