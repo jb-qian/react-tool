@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-06 18:58:59
+ * @LastEditTime: 2019-05-06 19:10:14
  */
 import * as React from 'react';
 
@@ -118,6 +118,10 @@ class App extends React.Component<Props, State> {
 			loading: true,
 		})
 		axios.get('/').then(res => {
+			this.setState({
+				loading: false,
+			})
+		}).catch(res => {
 			this.setState({
 				loading: false,
 			})
