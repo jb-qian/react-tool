@@ -24,8 +24,8 @@
     "experimentalDecorators": true,
   },
   "include": [
-    // "./src/**/*",
-    "./src/npm.ts",
+    "./src/*",
+    // "./src/npm.ts",
   ],
   "exclude": [
     "node_modules",

@@ -2,11 +2,9 @@
  * @Author: 宋乾
  * @Date: 2019-01-09 18:03:38
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-06 19:10:14
+ * @LastEditTime: 2019-05-08 18:37:11
  */
 import * as React from 'react';
-
-import './less/index.less';
 
 import * as styles from './less/css.module.less';
 import * as border from './less/border.module.less';
@@ -54,7 +52,7 @@ interface Value{
 	children?: Value[] | undefined;
 }
 interface Props {
-	app?: boolean;
+	history: any;
 }
 interface State {
 	loading: boolean;
@@ -83,10 +81,13 @@ class Text extends React.Component<NameProps> {
 	}
 }
 
+@Mounted
 class App extends React.Component<Props, State> {
 
 	@readonly
 	public text: string = 'componentWillUnmount调用了setState，但是没报错';
+
+	public timer: NodeJS.Timeout;
 
 	constructor(props: Props){
 		super(props)
@@ -140,28 +141,10 @@ class App extends React.Component<Props, State> {
 		Alert({
 			subtitle: '我是副标题',
 			title: '我是一个alert',
+			primary: () => {
+				this.props.history.push('/list');
+			}
 		})
-	}
-	public componentDidMount (){
-		this.ajax();
-		// 倒计时
-		let timer = setInterval(() => {
-			this.setState(prev => {
-				let number = prev.number - 1;
-				if (number === 0) {
-					clearInterval(timer);
-				}
-				return {
-					number,
-				}
-			})
-		}, 1000);
-		// 修改不能改变的值
-		try {
-			this.text = '文字被修改';
-		} catch (error) {
-			console.log('只读属性text不能被改变', error);
-		}
 	}
 	public onSelectChange = (item: Value[]) => {
 		console.log(item);
@@ -176,6 +159,30 @@ class App extends React.Component<Props, State> {
 	}
 	public input = (key: string, value: string) => {
 		console.log(key, value);
+	}
+	public componentDidMount (){
+		this.ajax();
+		// 倒计时
+		this.timer = setInterval(() => {
+			this.setState(prev => {
+				let number = prev.number - 1;
+				if (number === 0) {
+					clearInterval(this.timer);
+				}
+				return {
+					number,
+				}
+			})
+		}, 1000);
+		// 修改不能改变的值
+		try {
+			this.text = '文字被修改';
+		} catch (error) {
+			console.log('只读属性text不能被改变', error);
+		}
+	}
+	public componentWillUnmount (){
+		clearInterval(this.timer);
 	}
 	public render() {
 		let btnStyles = [styles.btn, border.br1].join(' ');

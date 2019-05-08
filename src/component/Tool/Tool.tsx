@@ -2,7 +2,7 @@
  * @Author: 宋乾
  * @Date: 2019-01-18 14:59:31
  * @LastEditors: 宋乾
- * @LastEditTime: 2019-05-06 18:59:43
+ * @LastEditTime: 2019-05-08 16:50:33
  */
 
 const PX = (size: number = 750) => {
@@ -40,16 +40,15 @@ function Mounted(target: Function) {
     } = _target;
 
     let _isMounted = false;
-
     
 	_target.componentDidMount = function (){
-        componentDidMount && componentDidMount.call(this);
 		_isMounted = true;
+        componentDidMount && componentDidMount.call(this);
     }
     
 	_target.componentWillUnmount = function (){
-		componentWillUnmount && componentWillUnmount.call(this);
         _isMounted = false;
+		componentWillUnmount && componentWillUnmount.call(this);
 	}
 
 	_target.setState = function (){
