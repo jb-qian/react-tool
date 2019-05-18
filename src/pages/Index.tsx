@@ -2,6 +2,8 @@ import * as React from 'react'
 
 import { Link } from 'react-router-dom';
 
+import connect, { Props } from '../redux/containers/name';
+
 const styles = {
     li: {
         marginBottom: 10,
@@ -15,7 +17,7 @@ const styles = {
     }
 }
 
-export default class Index extends React.Component{
+class Index extends React.Component<Props>{
     public render (){
         return (
             <div style={{ padding: 20 }}>
@@ -27,8 +29,13 @@ export default class Index extends React.Component{
                     <li style={ styles.li }>
                         <Link to={ '/list' }>ListView</Link>
                     </li>
+                    <li style={ styles.li }>
+                        <Link to={ '/songqian' }>{ this.props.name }的简历</Link>
+                    </li>
                 </ul>
             </div>
         )
     }
 }
+
+export default connect(Index);
